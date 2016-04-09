@@ -1,40 +1,21 @@
 package hu.progtech.setcardgame.bl;
 
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Shape;
-import javafx.scene.paint.Color;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Card {
 
     private int number;
-    private Shape shape;
+    private int shape;
     private int shading;
-    private Color color;
-
-    public List<Shape> listOfShapes = new ArrayList<Shape>();
-    public List<Color> listOfColors = new ArrayList<Color>();
+    private int color;
 
     public Card() {
-        listOfShapes.add(new Circle());
-        listOfShapes.add(new Rectangle());
-        listOfShapes.add(new Polygon());
-
-        listOfColors.add(Color.BLUE);
-        listOfColors.add(Color.RED);
-        listOfColors.add(Color.YELLOW);
     }
 
-    public Card(int number, Shape shape, int shading, Color color) {
-        super();
+    public Card(int number, int shape, int shading, int color) {
         this.number = number;
         this.shape = shape;
         this.shading = shading;
         this.color = color;
+
     }
 
     public int getNumber() {
@@ -45,11 +26,11 @@ public class Card {
         this.number = number;
     }
 
-    public Shape getShape() {
+    public int getShape() {
         return shape;
     }
 
-    public void setShape(Shape shape) {
+    public void setShape(int shape) {
         this.shape = shape;
     }
 
@@ -61,11 +42,11 @@ public class Card {
         this.shading = shading;
     }
 
-    public Color getColor() {
+    public int getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(int color) {
         this.color = color;
     }
 
@@ -77,18 +58,18 @@ public class Card {
         Card card = (Card) o;
 
         if (getNumber() != card.getNumber()) return false;
+        if (getShape() != card.getShape()) return false;
         if (getShading() != card.getShading()) return false;
-        if (getShape() != null ? !getShape().equals(card.getShape()) : card.getShape() != null) return false;
-        return getColor() != null ? getColor().equals(card.getColor()) : card.getColor() == null;
+        return getColor() == card.getColor();
 
     }
 
     @Override
     public int hashCode() {
         int result = getNumber();
-        result = 31 * result + (getShape() != null ? getShape().hashCode() : 0);
+        result = 31 * result + getShape();
         result = 31 * result + getShading();
-        result = 31 * result + (getColor() != null ? getColor().hashCode() : 0);
+        result = 31 * result + getColor();
         return result;
     }
 

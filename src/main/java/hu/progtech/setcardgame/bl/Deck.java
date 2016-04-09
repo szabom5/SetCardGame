@@ -2,9 +2,6 @@ package hu.progtech.setcardgame.bl;
 
 import hu.progtech.setcardgame.bl.Card;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
-
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,9 +26,9 @@ public class Deck {
 
         Card cardInit = new Card();
         for(int number = 0; number < 3; number++) {
-            for(Shape shape : cardInit.listOfShapes) {
+            for(int shape = 0; shape < 3; shape++) {
                 for(int shading = 0; shading < 3; shading++) {
-                    for(Color color : cardInit.listOfColors) {
+                    for(int color = 0; color < 3; color++) {
                         deck.add(new Card(number,shape,shading,color));
                     }
                 }

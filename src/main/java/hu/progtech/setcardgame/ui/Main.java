@@ -1,4 +1,4 @@
-package hu.progtech.setcardgame;
+package hu.progtech.setcardgame.ui;
 
 import hu.progtech.setcardgame.bl.*;
 
