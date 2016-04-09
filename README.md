@@ -2,7 +2,7 @@
 ##Brief
 SetCardGame is a desktop application for Set, a real-time card game designed by Marsha Falco in 1974 and published by Set Enterprises in 1991. The deck consists of 81 cards varying in four features:
 * number
-* symbol
+* shape
 * shading
 * color
 Each possible combination of features appears precisely once in the deck.
