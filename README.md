@@ -5,6 +5,7 @@ SetCardGame is a desktop application for Set, a real-time card game designed by 
 * shape
 * shading
 * color
+
 Each possible combination of features appears precisely once in the deck.
 
 ##What is a set
