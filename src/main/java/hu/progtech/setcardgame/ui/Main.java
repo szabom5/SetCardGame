@@ -16,7 +16,7 @@ public class Main extends Application {
 
         Parent rootparent = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
 
-        Scene scene = new Scene(new Pane(), 1000, 500);
+        Scene scene = new Scene(rootparent, 1000, 500);
 
         primaryStage.setTitle("SetCardGame");
         primaryStage.setScene(scene);

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.progtech.setcardgame.ui.ControllerToolBar">
+    <Label text="TIME" alignment="CENTER" prefWidth="100" prefHeight="100"/>
+    <ToolBar prefWidth="200">
+        <items>
+            <VBox>
+                <Button text="New Game" prefWidth="100"/>
+                <Button text="Restart" prefWidth="100"/>
+                <Button text="Resume" prefWidth="100"/>
+                <Button text="Pause" prefWidth="100"/>
+                <Button text="Save" prefWidth="100"/>
+            </VBox>
+        </items>
+    </ToolBar>
+</VBox>

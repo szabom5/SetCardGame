@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.progtech.setcardgame.ui.ControllerDeck">
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="0" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="1" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="2" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="3" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="4" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="5" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="6" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="7" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="8" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="9" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="10" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+    <Button prefHeight="150" prefWidth="100" onAction="#handleCard" fx:id="11" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+</GridPane>
