@@ -22,6 +22,10 @@ public class Deck {
         suffleAllCards();
     }
 
+    public Deck(List<Card> list) {
+        deck = list;
+    }
+
     private void makeNewDeck() {
 
         Card cardInit = new Card();

@@ -1,33 +1,22 @@
 package hu.progtech.setcardgame.ui;
 
-import hu.progtech.setcardgame.bl.*;
-
+import hu.progtech.setcardgame.dao.XMLHandlerDOM;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Start");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+    public void start(Stage primaryStage) throws Exception{
 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println(new Deck().toString());
-            }
-        });
+        Parent rootparent = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, 1000, 500);
+        Scene scene = new Scene(new Pane(), 1000, 500);
 
         primaryStage.setTitle("SetCardGame");
         primaryStage.setScene(scene);
@@ -36,5 +25,7 @@ public class Main extends Application {
     }
     public static void main(String[] args) {
         launch(args);
+        XMLHandlerDOM h = new XMLHandlerDOM();
+        System.out.println(h.ReadHighScoreTable().toString());
     }
 }
