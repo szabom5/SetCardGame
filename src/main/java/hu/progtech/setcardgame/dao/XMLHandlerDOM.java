@@ -9,6 +9,11 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import java.io.File;
 import java.io.IOException;
@@ -77,7 +82,7 @@ public class XMLHandlerDOM implements  XMLHandler{
      * @param score the score of the latest game.
      * @param player the player who played the latest game.
      */
-
+    @Override
     public void WriteScore(double score, String player) {
         try {
             doc = dBuilder.parse(leaderBoard);
@@ -106,6 +111,8 @@ public class XMLHandlerDOM implements  XMLHandler{
                 scoreElement.appendChild(doc.createTextNode( String.valueOf(score)));
 
                 playerElement.appendChild(scoreElement);
+
+                rootElement.appendChild(playerElement);
             }
 
         } catch (SAXException | IOException e) {
@@ -117,7 +124,7 @@ public class XMLHandlerDOM implements  XMLHandler{
      * Returns a list of player and score pairs, which will build the leaderboard up.
      * @return a list of player and score pairs.
      */
-
+    @Override
     public Map<String,List<Double> > ReadHighScoreTable() {
 
         Map<String,List<Double> > map = new HashMap<String, List<Double>>();
@@ -154,13 +161,13 @@ public class XMLHandlerDOM implements  XMLHandler{
      * @param n the n-th deck in the list of pre-shuffeled decks.
      * @return the requested pre-shuffeled deck.
      */
-
+    @Override
     public Deck ReadNextDeck(int n) {
 
         List<Card> deck = new ArrayList<Card>();
 
         try {
-            doc = dBuilder.parse(leaderBoard);
+            doc = dBuilder.parse(listOfDecks);
             NodeList deckList = doc.getElementsByTagName("Deck");
             if (deckList.item(n).getNodeType() == Node.ELEMENT_NODE) {
 
@@ -210,5 +217,49 @@ public class XMLHandlerDOM implements  XMLHandler{
         }
         return -1;
     }
+
+    /**
+     * Writes n pre-shuffeled Decks into the listOfDecks.xml file.
+     *
+     * @param list the list of decks to be written into the xml.
+     */
+    @Override
+    public void WritePreShuffeledDecks(List<Deck> list) {
+
+        try {
+            doc = dBuilder.newDocument();
+
+            Element rootElement = doc.createElement("ListOfDecks");
+
+            for(int i = 0;i<list.size();i++) {
+                Element deckElement = doc.createElement("Deck");
+                deckElement.setAttribute("id",Integer.toString(i));
+                for(Card card : list.get(i).getDeck()) {
+                    Element cardElement = doc.createElement("Card");
+                    cardElement.setAttribute("number",Integer.toString(card.getNumber()));
+                    cardElement.setAttribute("shape",Integer.toString(card.getShape()));
+                    cardElement.setAttribute("shading",Integer.toString(card.getShading()));
+                    cardElement.setAttribute("color",Integer.toString(card.getColor()));
+                    deckElement.appendChild(cardElement);
+                }
+                rootElement.appendChild(deckElement);
+            }
+
+            doc.appendChild(rootElement);
+
+            TransformerFactory tf = TransformerFactory.newInstance();
+            Transformer t = tf.newTransformer();
+
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(listOfDecks);
+
+            t.transform(source, result);
+
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }

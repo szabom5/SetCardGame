@@ -45,4 +45,10 @@ public interface XMLHandler {
      * @return the position of the player element, if not found returns -1.
      */
     public int positionOfPlayerInXML(String player);
+
+    /**
+     * Writes n pre-shuffeled Decks into the listOfDecks.xml file.
+     * @param list the list of decks to be written into the xml.
+     */
+    public void WritePreShuffeledDecks(List<Deck> list);
 }

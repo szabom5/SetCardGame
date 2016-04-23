@@ -1,14 +1,10 @@
 package hu.progtech.setcardgame.bl;
 
-import hu.progtech.setcardgame.bl.Card;
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.Math.random;
 
 /**
  * Created by marianna on 2016.04.09..
@@ -45,6 +41,9 @@ public class Deck {
         Collections.shuffle(deck,new Random());
     }
 
+    public List<Card> getDeck() {
+        return deck;
+    }
     @Override
     public String toString() {
         return "Deck{" +

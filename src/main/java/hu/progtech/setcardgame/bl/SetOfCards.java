@@ -1,7 +1,6 @@
 package hu.progtech.setcardgame.bl;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by marianna on 2016.04.10..
