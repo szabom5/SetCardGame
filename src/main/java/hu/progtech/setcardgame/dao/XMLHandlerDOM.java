@@ -2,24 +2,20 @@ package hu.progtech.setcardgame.dao;
 
 import hu.progtech.setcardgame.bl.Card;
 import hu.progtech.setcardgame.bl.Deck;
-import javafx.util.Pair;
-import jdk.nashorn.internal.objects.NativeArray;
+
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by marianna on 2016.04.16..
@@ -29,7 +25,8 @@ import java.util.List;
  * Handling all xml operations for the game.
  */
 
-public class XMLHandlerDOM {
+public class XMLHandlerDOM implements  XMLHandler{
+
     /**
      * File to keep track of the highscore of the players.
      */
@@ -50,6 +47,11 @@ public class XMLHandlerDOM {
      */
 
     DocumentBuilder dBuilder;
+
+    /**
+     * Document for parsing the xml.
+     */
+    Document doc;
 
     /**
      * Constructs a XMLHandlerDOM and sets the files for the class to use.
@@ -78,13 +80,13 @@ public class XMLHandlerDOM {
 
     public void WriteScore(double score, String player) {
         try {
-            Document doc = dBuilder.parse(leaderBoard);
+            doc = dBuilder.parse(leaderBoard);
 
             NodeList nList = doc.getElementsByTagName("player");
 
             Element rootElement = doc.getDocumentElement();
 
-            if(positionOfPlayerInXML(player,doc)==-1) {
+            if(positionOfPlayerInXML(player)==-1) {
                 Element playerElement = doc.createElement("player");
 
                 Attr attr = doc.createAttribute("name");
@@ -99,7 +101,7 @@ public class XMLHandlerDOM {
                 playerElement.appendChild(scoreElement);
 
             }else {
-                Element playerElement = (Element) nList.item(positionOfPlayerInXML(player,doc));
+                Element playerElement = (Element) nList.item(positionOfPlayerInXML(player));
                 Element scoreElement = doc.createElement("score");
                 scoreElement.appendChild(doc.createTextNode( String.valueOf(score)));
 
@@ -116,12 +118,12 @@ public class XMLHandlerDOM {
      * @return a list of player and score pairs.
      */
 
-    public List<Pair<String,Double> > ReadHighScoreTable() {
+    public Map<String,List<Double> > ReadHighScoreTable() {
 
-        List<Pair<String,Double> > list = new ArrayList();
+        Map<String,List<Double> > map = new HashMap<String, List<Double>>();
 
         try {
-            Document doc = dBuilder.parse(leaderBoard);
+            doc = dBuilder.parse(leaderBoard);
             NodeList nList = doc.getElementsByTagName("player");
 
             for(int i = 0; i< nList.getLength();i++) {
@@ -129,13 +131,13 @@ public class XMLHandlerDOM {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element playerElement = (Element) node;
                     String player = playerElement.getAttribute("name");
-                    Pair<String,Double> pair;
+                    List<Double> list = new ArrayList();
                     NodeList scoreList = playerElement.getElementsByTagName("score");
                     for(int j = 0; j< scoreList.getLength();j++) {
                         Element score = (Element) scoreList.item(j);
-                        pair = new Pair(player, score.getTextContent());
-                        list.add(pair);
+                        list.add(Double.parseDouble(score.getTextContent()));
                     }
+                    map.put(player,list);
                 }
             }
 
@@ -144,7 +146,7 @@ public class XMLHandlerDOM {
             e.printStackTrace();
         }
 
-        return list;
+        return map;
     }
 
     /**
@@ -158,7 +160,7 @@ public class XMLHandlerDOM {
         List<Card> deck = new ArrayList<Card>();
 
         try {
-            Document doc = dBuilder.parse(leaderBoard);
+            doc = dBuilder.parse(leaderBoard);
             NodeList deckList = doc.getElementsByTagName("Deck");
             if (deckList.item(n).getNodeType() == Node.ELEMENT_NODE) {
 
@@ -189,12 +191,13 @@ public class XMLHandlerDOM {
     }
 
     /**
-     * Returns the position of the player in the leaderBoard xml.
-     * @param player the subject of the search.
-     * @param doc the xml to search in.
+     * Returns the position of the player in the sorted leaderBoard xml.
+     *
+     * @param player the subject of the search
      * @return the position of the player element, if not found returns -1.
      */
-    public int positionOfPlayerInXML(String player, Document doc) {
+    @Override
+    public int positionOfPlayerInXML(String player) {
         NodeList nList = doc.getElementsByTagName("player");
         for (int i = 0; i< nList.getLength();i++) {
             Node node = nList.item(i);
