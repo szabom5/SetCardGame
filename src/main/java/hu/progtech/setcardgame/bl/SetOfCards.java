@@ -23,15 +23,15 @@ public class SetOfCards {
 
     }
 
-    boolean isAllDiffrent(int a, int b, int c) {
+    private boolean isAllDiffrent(int a, int b, int c) {
         return (a != b && a != c && b != c)?true:false;
     }
 
-    boolean isAllSame(int a, int b, int c) {
+    private boolean isAllSame(int a, int b, int c) {
         return (a == b && a == c && b == b)?true:false;
     }
 
-    boolean isNumberValid() {
+    private boolean isNumberValid() {
         if(
                  isAllDiffrent(cardSet.get(0).getNumber(),cardSet.get(1).getNumber(),cardSet.get(2).getNumber())
                     ||
@@ -42,7 +42,7 @@ public class SetOfCards {
         return false;
     }
 
-    boolean isShapeValid() {
+    private boolean isShapeValid() {
         if(
                 isAllDiffrent(cardSet.get(0).getShape(),cardSet.get(1).getShape(),cardSet.get(2).getShape())
                         ||
@@ -53,7 +53,7 @@ public class SetOfCards {
         return false;
     }
 
-    boolean isShadingValid() {
+    private boolean isShadingValid() {
         if(
                 isAllDiffrent(cardSet.get(0).getShading(),cardSet.get(1).getShading(),cardSet.get(2).getShading())
                         ||
@@ -64,7 +64,7 @@ public class SetOfCards {
         return false;
     }
 
-    boolean isColorValid() {
+    private boolean isColorValid() {
         if(
                 isAllDiffrent(cardSet.get(0).getColor(),cardSet.get(1).getColor(),cardSet.get(2).getColor())
                         ||
@@ -75,7 +75,7 @@ public class SetOfCards {
         return false;
     }
 
-    boolean isSet() {
+    public boolean isSet() {
         if(!cardSet.isEmpty()) {
             if(isNumberValid() && isShapeValid() && isShadingValid() && isColorValid()) {
                 return true;

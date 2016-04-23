@@ -35,28 +35,28 @@ public class XMLHandlerDOM implements  XMLHandler{
     /**
      * File to keep track of the highscore of the players.
      */
-    File leaderBoard;
+    private File leaderBoard;
     /**
      * File to offer a pre-made series of shuffles to play.
      */
-    File listOfDecks;
+    private File listOfDecks;
 
     /**
      * DocumentFactory for parsing the xml.
      */
 
-    DocumentBuilderFactory dbFactory;
+    private DocumentBuilderFactory dbFactory;
 
     /**
      * DocumentBuilder for parsing the xml.
      */
 
-    DocumentBuilder dBuilder;
+    private DocumentBuilder dBuilder;
 
     /**
      * Document for parsing the xml.
      */
-    Document doc;
+    private Document doc;
 
     /**
      * Constructs a XMLHandlerDOM and sets the files for the class to use.
@@ -83,7 +83,7 @@ public class XMLHandlerDOM implements  XMLHandler{
      * @param player the player who played the latest game.
      */
     @Override
-    public void WriteScore(double score, String player) {
+    public void writeScore(double score, String player) {
         try {
             doc = dBuilder.parse(leaderBoard);
 
@@ -125,9 +125,9 @@ public class XMLHandlerDOM implements  XMLHandler{
      * @return a list of player and score pairs.
      */
     @Override
-    public Map<String,List<Double> > ReadHighScoreTable() {
+    public Map<String,List<Double> > readHighScoreTable() {
 
-        Map<String,List<Double> > map = new HashMap<String, List<Double>>();
+        Map<String,List<Double> > map = new HashMap<>();
 
         try {
             doc = dBuilder.parse(leaderBoard);
@@ -162,9 +162,9 @@ public class XMLHandlerDOM implements  XMLHandler{
      * @return the requested pre-shuffeled deck.
      */
     @Override
-    public Deck ReadNextDeck(int n) {
+    public Deck readNextDeck(int n) {
 
-        List<Card> deck = new ArrayList<Card>();
+        List<Card> deck = new ArrayList<>();
 
         try {
             doc = dBuilder.parse(listOfDecks);
@@ -224,7 +224,7 @@ public class XMLHandlerDOM implements  XMLHandler{
      * @param list the list of decks to be written into the xml.
      */
     @Override
-    public void WritePreShuffeledDecks(List<Deck> list) {
+    public void writePreShuffeledDecks(List<Deck> list) {
 
         try {
             doc = dBuilder.newDocument();

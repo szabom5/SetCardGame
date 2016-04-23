@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class Deck {
 
-    List<Card> deck = new ArrayList<Card>();
+    List<Card> deck = new ArrayList<>();
 
     public Deck() {
         makeNewDeck();
@@ -24,7 +24,6 @@ public class Deck {
 
     private void makeNewDeck() {
 
-        Card cardInit = new Card();
         for(int number = 0; number < 3; number++) {
             for(int shape = 0; shape < 3; shape++) {
                 for(int shading = 0; shading < 3; shading++) {

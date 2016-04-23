@@ -22,14 +22,14 @@ public interface XMLHandler {
      * @param player the player who played the latest game.
      */
 
-    public void WriteScore(double score, String player);
+    public void writeScore(double score, String player);
 
     /**
      * Returns a map of players and list of scores, which will build the leaderboard up.
      * @return a map with the name of the players as keys and the list of scores to each player.
      */
 
-    public Map<String,List<Double> > ReadHighScoreTable();
+    public Map<String,List<Double> > readHighScoreTable();
 
     /**
      * Returns the requested pre-shuffeled deck.
@@ -37,7 +37,7 @@ public interface XMLHandler {
      * @return the requested pre-shuffeled deck.
      */
 
-    public Deck ReadNextDeck(int n);
+    public Deck readNextDeck(int n);
 
     /**
      * Returns the position of the player in the sorted leaderBoard xml.
@@ -50,5 +50,5 @@ public interface XMLHandler {
      * Writes n pre-shuffeled Decks into the listOfDecks.xml file.
      * @param list the list of decks to be written into the xml.
      */
-    public void WritePreShuffeledDecks(List<Deck> list);
+    public void writePreShuffeledDecks(List<Deck> list);
 }
