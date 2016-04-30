@@ -7,11 +7,11 @@
     <ToolBar prefWidth="200">
         <items>
             <VBox>
-                <Button text="New Game" prefWidth="100"/>
-                <Button text="Restart" prefWidth="100"/>
-                <Button text="Resume" prefWidth="100"/>
-                <Button text="Pause" prefWidth="100"/>
-                <Button text="Save" prefWidth="100"/>
+                <Button text="New Game" onAction="#handleNewGame" prefWidth="100"/>
+                <Button text="Restart" onAction="#handleRestart" prefWidth="100"/>
+                <Button text="Resume" onAction="#handleResume" prefWidth="100"/>
+                <Button text="Pause" onAction="#handlePause" prefWidth="100"/>
+                <Button text="Save" onAction="#handleSave" prefWidth="100"/>
             </VBox>
         </items>
     </ToolBar>

@@ -29,7 +29,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
         XMLHandler h = new XMLHandlerDOM();
-        System.out.println(h.ReadHighScoreTable().toString());
+        System.out.println(h.readHighScoreTable().toString());
         List<Deck> list = new ArrayList<>();
         for(int i =0;i<20;i++) {
             list.add(new Deck());

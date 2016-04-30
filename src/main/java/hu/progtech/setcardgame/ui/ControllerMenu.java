@@ -13,6 +13,7 @@ public class ControllerMenu {
     }
 
     public void handleNewGame(ActionEvent actionEvent) {
+
     }
 
     public void handleSave(ActionEvent actionEvent) {
