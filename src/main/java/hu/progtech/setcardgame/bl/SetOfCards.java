@@ -1,5 +1,6 @@
 package hu.progtech.setcardgame.bl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,6 +11,7 @@ public class SetOfCards {
     private List<Card> cardSet;
 
     public SetOfCards() {
+        cardSet = new ArrayList<>();
     }
 
     public SetOfCards(List<Card> cardSet) {
@@ -17,10 +19,20 @@ public class SetOfCards {
     }
 
     public SetOfCards(Card c1, Card c2, Card c3) {
+        cardSet = new ArrayList<>();
         cardSet.add(c1);
         cardSet.add(c2);
         cardSet.add(c3);
 
+    }
+
+    public void addCardtoSet(Card card) {
+        if(cardSet.size()<3) {
+            cardSet.add(card);
+        }/*else {
+            cardSet.clear();
+            cardSet.add(card);
+        }*/
     }
 
     private boolean isAllDiffrent(int a, int b, int c) {
@@ -76,7 +88,7 @@ public class SetOfCards {
     }
 
     public boolean isSet() {
-        if(!cardSet.isEmpty()) {
+        if(cardSet.size()==3) {
             if(isNumberValid() && isShapeValid() && isShadingValid() && isColorValid()) {
                 return true;
             }
@@ -113,5 +125,9 @@ public class SetOfCards {
         return "SetOfCards{" +
                 "cardSet=" + cardSet +
                 '}';
+    }
+
+    public void removeFromSetOfCards(Card c) {
+        cardSet.remove(c);
     }
 }

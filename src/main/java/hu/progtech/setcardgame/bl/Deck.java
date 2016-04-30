@@ -11,15 +11,29 @@ import java.util.Random;
  */
 public class Deck {
 
-    List<Card> deck = new ArrayList<>();
+    private List<Card> deck = new ArrayList<>();
+
+    private int indexOfNextCard;
 
     public Deck() {
         makeNewDeck();
         suffleAllCards();
+        indexOfNextCard = 0;
     }
 
     public Deck(List<Card> list) {
         deck = list;
+        indexOfNextCard = 0;
+    }
+
+    public Card getNextCard() {
+        Card card = null;
+        if(indexOfNextCard < deck.size())
+        {
+            card = deck.get(indexOfNextCard);
+            indexOfNextCard++;
+        }
+        return card;
     }
 
     private void makeNewDeck() {

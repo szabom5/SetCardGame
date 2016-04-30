@@ -28,7 +28,7 @@ public class DrawCard {
         this.gc = gc;
         heightOfCanvas = gc.getCanvas().getHeight();
         widthOfCanvas = gc.getCanvas().getWidth();
-        heightOfObject = heightOfCanvas/5;
+        heightOfObject = heightOfCanvas/6;
         widthOfObject = heightOfObject;
 
     }
@@ -37,7 +37,7 @@ public class DrawCard {
         this.gc = gc;
         heightOfCanvas = gc.getCanvas().getHeight();
         widthOfCanvas = gc.getCanvas().getWidth();
-        heightOfObject = heightOfCanvas/5;
+        heightOfObject = heightOfCanvas/6;
         widthOfObject = heightOfObject;
 
     }
@@ -52,12 +52,18 @@ public class DrawCard {
 
     public void draw()
     {
+
         gc.clearRect(0, 0, widthOfCanvas, heightOfCanvas);
         gc.setLineWidth(5);
         gc.setStroke(Color.BLACK);
         gc.strokeRoundRect(0,0,widthOfCanvas,heightOfCanvas,10,10);
-        initColor();
-        initNumber();
+        if(card!=null) {
+            initColor();
+            initNumber();
+        }else{
+            gc.setFill(Color.DARKTURQUOISE);
+            gc.fillRoundRect(0,0,widthOfCanvas,heightOfCanvas,10,10);
+        }
 
     }
 
@@ -97,9 +103,9 @@ public class DrawCard {
     private void initShape(int n) {
             switch (card.getShape()) {
                 case 0:
-                    if(n==0) {
+                    if(n==1) {
                         drawCircle((widthOfCanvas-widthOfObject)/2,(heightOfCanvas-heightOfObject)/2,widthOfObject,heightOfObject);
-                    }else if(n==1) {
+                    }else if(n==2) {
                         drawCircle((widthOfCanvas-widthOfObject)/2,heightOfCanvas*1/8,widthOfObject,heightOfObject);
                         drawCircle((widthOfCanvas-widthOfObject)/2,heightOfCanvas*5/8,widthOfObject,heightOfObject);
                     }else {
@@ -109,9 +115,9 @@ public class DrawCard {
                     }
                     break;
                 case 1:
-                    if(n==0) {
+                    if(n==1) {
                         drawRectangle((widthOfCanvas - widthOfObject) / 2, (heightOfCanvas - heightOfObject) / 2, widthOfObject, heightOfObject);
-                    }else if(n==1) {
+                    }else if(n==2) {
                         drawRectangle((widthOfCanvas - widthOfObject) / 2, heightOfCanvas * 1 / 8, widthOfObject, heightOfObject);
                         drawRectangle((widthOfCanvas - widthOfObject) / 2, heightOfCanvas * 5 / 8, widthOfObject, heightOfObject);
                     }else {
@@ -121,9 +127,9 @@ public class DrawCard {
                     }
                     break;
                 case 2:
-                    if(n==0) {
+                    if(n==1) {
                         drawTriangle((widthOfCanvas - widthOfObject) / 2, (heightOfCanvas - heightOfObject) / 2, widthOfObject, heightOfObject);
-                    }else if(n==1) {
+                    }else if(n==2) {
                         drawTriangle((widthOfCanvas - widthOfObject) / 2, heightOfCanvas * 1 / 8, widthOfObject, heightOfObject);
                         drawTriangle((widthOfCanvas - widthOfObject) / 2, heightOfCanvas * 5 / 8, widthOfObject, heightOfObject);
                     }else {

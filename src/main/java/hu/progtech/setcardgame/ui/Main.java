@@ -34,7 +34,7 @@ public class Main extends Application {
         for(int i =0;i<20;i++) {
             list.add(new Deck());
         }
-        //h.WritePreShuffeledDecks(list);
+
 
     }
 }
