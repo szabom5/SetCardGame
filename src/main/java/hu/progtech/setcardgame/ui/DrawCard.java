@@ -54,15 +54,14 @@ public class DrawCard {
     {
 
         gc.clearRect(0, 0, widthOfCanvas, heightOfCanvas);
+        gc.setFill(Color.WHITE);
+        gc.fillRoundRect(0, 0, widthOfCanvas, heightOfCanvas,50,50);
         gc.setLineWidth(5);
         gc.setStroke(Color.BLACK);
-        gc.strokeRoundRect(0,0,widthOfCanvas,heightOfCanvas,10,10);
+        gc.strokeRoundRect(0,0,widthOfCanvas,heightOfCanvas,50,50);
         if(card!=null) {
             initColor();
             initNumber();
-        }else{
-            gc.setFill(Color.DARKTURQUOISE);
-            gc.fillRoundRect(0,0,widthOfCanvas,heightOfCanvas,10,10);
         }
 
     }
@@ -78,8 +77,8 @@ public class DrawCard {
                 gc.setFill(Color.RED);
                 break;
             case 2:
-                gc.setStroke(Color.GREENYELLOW);
-                gc.setFill(Color.GREENYELLOW);
+                gc.setStroke(Color.DARKGREEN);
+                gc.setFill(Color.DARKGREEN);
                 break;
             default: break;
         }

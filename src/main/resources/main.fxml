@@ -11,6 +11,7 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.text.Font?>
+
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.progtech.setcardgame.ui.ControllerMain">
    <top>
       <!--<fx:include source="menu.fxml" /> -->
@@ -41,7 +42,7 @@
    <left>
         <!--<fx:include source="toolbar.fxml"/>-->
        <VBox prefWidth="150">
-           <Label fx:id="lTime" text="00:00" alignment="CENTER" prefWidth="150" prefHeight="100">
+           <Label fx:id="lTime" text="0:00:00.00" alignment="CENTER" prefWidth="150" prefHeight="100">
                <font>
                    <Font size="20"/>
                </font>
@@ -73,9 +74,9 @@
    </left>
    <center>
         <!--<fx:include source="deck.fxml"/>-->
-       <GridPane fx:id="gridPaneDeck" style="-fx-border-color: black;">
+       <GridPane fx:id="gridPaneDeck" style="-fx-border-color: black; -fx-background-color: green;" hgap="10" vgap="10">
            <children>
-               <Canvas fx:id="canvas0" height="150" width="100" onMouseClicked="#drawClicked"  GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+               <Canvas fx:id="canvas0" height="150" width="100" onMouseClicked="#drawClicked" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                <Canvas fx:id="canvas1" height="150" width="100" onMouseClicked="#drawClicked" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                <Canvas fx:id="canvas2" height="150" width="100" onMouseClicked="#drawClicked" GridPane.columnIndex="2" GridPane.rowIndex="0" />
                <Canvas fx:id="canvas3" height="150" width="100" onMouseClicked="#drawClicked" GridPane.columnIndex="3" GridPane.rowIndex="0" />

@@ -3,8 +3,12 @@ package hu.progtech.setcardgame.ui;
 import hu.progtech.setcardgame.bl.Card;
 import hu.progtech.setcardgame.bl.Deck;
 import hu.progtech.setcardgame.bl.SetOfCards;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -14,17 +18,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import org.apache.commons.lang.time.StopWatch;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URL;
+import java.util.*;
 
 /**
  * Created by marianna on 2016.04.15..
  */
-public class ControllerMain {
+public class ControllerMain implements Initializable{
 
     private int numberOfSets;
-
-    private StopWatch stopWatch;
 
     private Canvas canvas;
 
@@ -35,6 +37,12 @@ public class ControllerMain {
     private List<Card> cardsDisplayed;
 
     private DrawCard drawCard;
+
+    private long lCounter = 0;
+
+    private Timer timer = null;
+
+    private TimerTask timerTask = null;
 
     @FXML
     private GridPane gridPaneDeck;
@@ -66,9 +74,66 @@ public class ControllerMain {
     @FXML
     private Label lMsg;
 
+    private String formatTimer(long time) {
+        long hours, minutes,seconds,milliseconds;
+        milliseconds = time % 100;
+        time/=100;
+        seconds = time % 60;
+        time/=60;
+        minutes = time % 60;
+        time/=60;
+        hours = time;
+        return hours+":"+(minutes<10?"0"+minutes:minutes)+":"+(seconds<10?"0"+seconds:seconds)+"."+(milliseconds<10?"0"+milliseconds:milliseconds);
+    }
+
+    private void startTimer() {
+        timer = new Timer();
+        timerTask = new TimerTask() {
+
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        lTime.setText(formatTimer(lCounter));
+                        lCounter++;
+                    }
+                });
+            }
+        };
+        timer.schedule(timerTask, 10, 10); //millisec mennyi idonkent frissitse
+    }
+
+    private void stopTimer() {
+        if(timer != null) timer.cancel();
+        if(timerTask != null) timerTask.cancel();
+        lCounter = 0;
+        lTime.setText(formatTimer(lCounter));
+    }
+
+    private void pauseTimer() {
+        if(timer != null) timer.cancel();
+        if(timerTask != null) timerTask.cancel();
+        lTime.setText(formatTimer(lCounter));
+    }
+
+    private void refresh() {
+        GraphicsContext gc;
+        drawCard = new DrawCard(canvas0.getGraphicsContext2D());
+
+        if(cardsDisplayed!=null && !cardsDisplayed.isEmpty()) {
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 4; j++) {
+                    gc = ((Canvas) gridPaneDeck.getChildren().get(i * 4 + j)).getGraphicsContext2D();
+                    drawCard.setGc(gc);
+                    drawCard.setCard(cardsDisplayed.get(i * 4 + j));
+                    drawCard.draw();
+                }
+            }
+        }
+    }
+
     @FXML
     public void handleNewGame(ActionEvent actionEvent) {
-
         tRestart.setDisable(false);
         tSave.setDisable(false);
         tPause.setDisable(false);
@@ -95,10 +160,9 @@ public class ControllerMain {
         numberOfSets = 0;
         lNumOfSets.setText( Integer.toString(numberOfSets));
 
-        stopWatch = new StopWatch();
-        stopWatch.start();
+        stopTimer();
+        startTimer();
 
-        lTime.setText(stopWatch.toString());
         lMsg.setText("");
         lMsg.setTextFill(Color.DARKRED);
 
@@ -106,8 +170,8 @@ public class ControllerMain {
 
     @FXML
     public void handleRestart(ActionEvent actionEvent) {
-        stopWatch.reset();
-        stopWatch.start();
+        stopTimer();
+        startTimer();
         //TODO
     }
 
@@ -126,7 +190,7 @@ public class ControllerMain {
         tPause.setDisable(true);
         tResume.setDisable(true);
         gridPaneDeck.setVisible(false);
-        stopWatch.stop();
+        stopTimer();
     }
 
     @FXML
@@ -139,7 +203,7 @@ public class ControllerMain {
         tResume.setDisable(true);
 
         gridPaneDeck.setVisible(true);
-        stopWatch.resume();
+        startTimer();
     }
 
     @FXML
@@ -148,7 +212,7 @@ public class ControllerMain {
         tPause.setDisable(true);
 
         gridPaneDeck.setVisible(false);
-        stopWatch.suspend();
+        pauseTimer();
     }
 
 
@@ -257,5 +321,49 @@ public class ControllerMain {
            }
            lMsg.setText("No sets available!");
    }
+
+    private void setGridWidthProperties(double width) {
+        System.out.println("futok");
+        for(int i = 0; i< 12;i++) {
+            ((Canvas) gridPaneDeck.getChildren().get(i)).setWidth(width / 5);
+
+        }
+
+    }
+
+    private void setGridHeightProperties(double height) {
+        System.out.println("futok");
+        for(int i = 0; i< 12;i++) {
+            ((Canvas) gridPaneDeck.getChildren().get(i)).setHeight(height / 4);
+        }
+
+    }
+
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        gridPaneDeck.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
+                System.out.println(oldSceneWidth+" "+newSceneWidth);
+                setGridWidthProperties(newSceneWidth.doubleValue());
+                refresh();
+            }
+        });
+        gridPaneDeck.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
+                System.out.println(oldSceneHeight+" "+newSceneHeight);
+                setGridHeightProperties(newSceneHeight.doubleValue());
+                refresh();
+            }
+        });
+    }
+
 }
 
