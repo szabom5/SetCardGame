@@ -8,7 +8,6 @@ import hu.progtech.setcardgame.bl.Deck;
 import hu.progtech.setcardgame.bl.Score;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Handling all xml operations for the game.
