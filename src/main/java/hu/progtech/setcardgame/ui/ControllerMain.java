@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
-import org.apache.commons.lang.time.StopWatch;
+import javafx.scene.paint.Paint;
 
 import java.net.URL;
 import java.util.*;
@@ -215,11 +215,14 @@ public class ControllerMain implements Initializable{
 
     @FXML
     public void handleRules(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Rules");
+        alert.setHeaderText("How to play the Set Card Game");
+        alert.setContentText("Rules");
+
+        alert.showAndWait();
     }
 
-    @FXML
-    public void handleUndo(ActionEvent actionEvent) {
-    }
 
     @FXML
     public void handleSave(ActionEvent actionEvent) {
@@ -286,21 +289,14 @@ public class ControllerMain implements Initializable{
     @FXML
     protected void drawClicked(MouseEvent me) {
         canvas = (Canvas) me.getSource();
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setLineWidth(10);
 
         Card currentCard = cardsDisplayed.get(gridPaneDeck.getRowIndex(canvas)*4+gridPaneDeck.getColumnIndex(canvas));
 
         if(setOfCards.getCardSet().contains(currentCard)) {
             setOfCards.removeFromSetOfCards(currentCard);
-            gc.setStroke(Color.WHITE);
-            gc.strokeRoundRect(0,0,canvas.getWidth(),canvas.getHeight(),10,10);
-            gc.setLineWidth(5);
-            gc.setStroke(Color.BLACK);
-            gc.strokeRoundRect(0,0,canvas.getWidth(),canvas.getHeight(),10,10);
+            drawBorder(canvas,Color.BLACK);
         } else {
-            gc.setStroke(Color.CORAL);
-            gc.strokeRoundRect(0,0,canvas.getWidth(),canvas.getHeight(),10,10);
+            drawBorder(canvas,Color.CORAL);
             setOfCards.addCardtoSet(currentCard);
             if(setOfCards.getCardSet().size()==3) {
                 if(setOfCards.isSet()) {
@@ -322,14 +318,7 @@ public class ControllerMain implements Initializable{
         if(!setOfCards.getCardSet().isEmpty()) {
             for (Card card : setOfCards.getCardSet()) {
                 canvas = (Canvas) gridPaneDeck.getChildren().get(cardsDisplayed.indexOf(card));
-                GraphicsContext gc = (canvas).getGraphicsContext2D();
-                gc.setLineWidth(10);
-                gc.setStroke(Color.WHITE);
-                gc.strokeRoundRect(0, 0, canvas.getWidth(), canvas.getHeight(), 10, 10);
-
-                gc.setLineWidth(5);
-                gc.setStroke(Color.BLACK);
-                gc.strokeRoundRect(0, 0, canvas.getWidth(), canvas.getHeight(), 10, 10);
+                drawBorder(canvas,Color.BLACK);
             }
         }
     }
@@ -337,10 +326,7 @@ public class ControllerMain implements Initializable{
     private void drawBorderForHint() {
         for(Card card: setOfCards.getCardSet()) {
             canvas = (Canvas)gridPaneDeck.getChildren().get(cardsDisplayed.indexOf(card));
-            GraphicsContext gc = (canvas).getGraphicsContext2D();
-            gc.setLineWidth(10);
-            gc.setStroke(Color.DEEPPINK);
-            gc.strokeRoundRect(0,0,canvas.getWidth(),canvas.getHeight(),10,10);
+            drawBorder(canvas,Color.DEEPPINK);
         }
     }
 
@@ -419,6 +405,15 @@ public class ControllerMain implements Initializable{
            }
            lMsg.setText("No sets available!");
    }
+
+    private void drawBorder(Canvas c, Paint paint) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.WHITE);
+        gc.strokeRoundRect(0, 0, c.getWidth(), c.getHeight(),50,50);
+        gc.setLineWidth(10);
+        gc.setStroke(paint);
+        gc.strokeRoundRect(0, 0, c.getWidth(), c.getHeight(),50,50);
+    }
 
     private void setGridWidthProperties(double width) {
         for(int i = 0; i< 12;i++) {

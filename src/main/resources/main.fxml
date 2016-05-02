@@ -25,11 +25,6 @@
                            <MenuItem fx:id="leaderBoard" text="LeaderBoard" onAction="#handleLeaderBoard"/>
                        </items>
                    </Menu>
-                   <Menu text="Edit">
-                       <items>
-                           <MenuItem fx:id="undo" text="Undo" onAction="#handleUndo"/>
-                       </items>
-                   </Menu>
                    <Menu text="Help">
                        <items>
                            <MenuItem fx:id="rules" text="Rules" onAction="#handleRules"/>
