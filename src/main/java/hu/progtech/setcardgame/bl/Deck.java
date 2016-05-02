@@ -36,6 +36,9 @@ public class Deck {
         return card;
     }
 
+    public void resetNextCard() {
+        indexOfNextCard = 0;
+    }
     private void makeNewDeck() {
 
         for(int number = 0; number < 3; number++) {

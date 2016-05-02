@@ -180,9 +180,37 @@ public class ControllerMain implements Initializable{
 
     @FXML
     public void handleRestart(ActionEvent actionEvent) {
+        tRestart.setDisable(false);
+        tSave.setDisable(false);
+        tPause.setDisable(false);
+        tHint.setDisable(false);
+        gridPaneDeck.setVisible(true);
+
+        numberOfHintUsed = 0;
+        cardsDisplayed.clear();
+        setOfCards.getCardSet().clear();
+        GraphicsContext gc;
+        drawCard = new DrawCard(canvas0.getGraphicsContext2D());
+        deck.resetNextCard();
+
+        for(int i = 0; i< 3;i++) {
+            for(int j = 0;j<4;j++) {
+                cardsDisplayed.add(deck.getNextCard());
+                gc = ((Canvas) gridPaneDeck.getChildren().get(i*4+j)).getGraphicsContext2D();
+                drawCard.setGc(gc);
+                drawCard.setCard(cardsDisplayed.get(cardsDisplayed.size()-1));
+                drawCard.draw();
+            }
+        }
+
+        numberOfSetsFound = 0;
+        lNumOfSets.setText( Integer.toString(numberOfSetsFound));
+
         stopTimer();
         startTimer();
-        //TODO
+
+        lMsg.setText("");
+        lMsg.setTextFill(Color.DARKRED);
     }
 
     @FXML
