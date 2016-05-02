@@ -54,7 +54,7 @@
                        <Button fx:id="tRestart" text="Restart" disable="true" onAction="#handleRestart" prefWidth="100"/>
                        <Button fx:id="tResume" text="Resume" disable="true" onAction="#handleResume" prefWidth="100"/>
                        <Button fx:id="tPause" text="Pause" disable="true" onAction="#handlePause" prefWidth="100"/>
-                       <Button fx:id="tSave" text="Save &amp; Exit" disable="true" onAction="#handleSave" prefWidth="100"/>
+                       <Button fx:id="tSave" text="Save" disable="true" onAction="#handleSave" prefWidth="100"/>
                        <Button fx:id="tHint" text="Hint" disable="true" onAction="#handleHint" prefWidth="100"/>
                    </VBox>
                </items>

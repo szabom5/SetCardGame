@@ -253,8 +253,6 @@ public class ControllerMain implements Initializable{
 
     @FXML
     protected void drawClicked(MouseEvent me) {
-        System.out.println(setOfCards.toString());
-
         canvas = (Canvas) me.getSource();
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setLineWidth(10);
@@ -324,6 +322,39 @@ public class ControllerMain implements Initializable{
             cardsDisplayed.set(cardsDisplayed.indexOf(card),newCard);
         }
         setOfCards.getCardSet().clear();
+        if(!checkAvailableSet()) {
+            pauseTimer();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("***** Congratulations! *****");
+            alert.setHeaderText(null);
+            alert.setContentText("You have found all sets available in this deck!\n" +
+                    "Please save your score!");
+            alert.showAndWait();
+        }
+    }
+    private boolean checkAvailableSet() {
+        setOfCards.getCardSet().clear();
+        for (int i = 0; i < 10; i++) {
+            for (int z = i + 1; z < 11; z++) {
+                for (int u = z + 1; u < 12; u++) {
+                    if (cardsDisplayed.get(i) == null || cardsDisplayed.get(z) == null || cardsDisplayed.get(u) == null)
+                    {
+                        continue;
+                    }
+                    setOfCards.getCardSet().add(cardsDisplayed.get(i));
+                    setOfCards.getCardSet().add(cardsDisplayed.get(z));
+                    setOfCards.getCardSet().add(cardsDisplayed.get(u));
+
+                    if (setOfCards.isSet()) {
+                        return true;
+                    } else {
+                        setOfCards.getCardSet().clear();
+                    }
+                }
+            }
+
+        }
+        return false;
     }
 
    @FXML
@@ -343,7 +374,6 @@ public class ControllerMain implements Initializable{
                        setOfCards.getCardSet().add(cardsDisplayed.get(u));
 
                        if (setOfCards.isSet()) {
-                           System.out.println(i + " " + z + " " + u);
                            drawBorderForHint();
                            return;
                        } else {
@@ -358,7 +388,6 @@ public class ControllerMain implements Initializable{
    }
 
     private void setGridWidthProperties(double width) {
-        System.out.println("futok");
         for(int i = 0; i< 12;i++) {
             ((Canvas) gridPaneDeck.getChildren().get(i)).setWidth(width / 5);
 
@@ -367,7 +396,6 @@ public class ControllerMain implements Initializable{
     }
 
     private void setGridHeightProperties(double height) {
-        System.out.println("futok");
         for(int i = 0; i< 12;i++) {
             ((Canvas) gridPaneDeck.getChildren().get(i)).setHeight(height / 4);
         }
@@ -388,14 +416,12 @@ public class ControllerMain implements Initializable{
 
         gridPaneDeck.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                System.out.println(oldSceneWidth+" "+newSceneWidth);
                 setGridWidthProperties(newSceneWidth.doubleValue());
                 refresh();
             }
         });
         gridPaneDeck.heightProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                System.out.println(oldSceneHeight+" "+newSceneHeight);
                 setGridHeightProperties(newSceneHeight.doubleValue());
                 refresh();
             }
