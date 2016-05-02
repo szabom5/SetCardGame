@@ -3,6 +3,7 @@ package hu.progtech.setcardgame.dao;
 import hu.progtech.setcardgame.bl.Card;
 import hu.progtech.setcardgame.bl.Deck;
 
+import hu.progtech.setcardgame.bl.Score;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -10,6 +11,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -33,7 +35,7 @@ import java.util.Map;
 public class XMLHandlerDOM implements  XMLHandler{
 
     /**
-     * File to keep track of the highscore of the players.
+     * File to keep track of the high score of the players.
      */
     private File leaderBoard;
     /**
@@ -79,87 +81,74 @@ public class XMLHandlerDOM implements  XMLHandler{
     /**
      * Writes into the leaderBoard xml file the score of the latest game.
      *
-     * @param score the score of the latest game.
-     * @param player the player who played the latest game.
+     * @param score the Score of the latest game.
      */
     @Override
-    public void writeScore(double score, String player) {
+    public void writeScore(Score score) {
         try {
             doc = dBuilder.parse(leaderBoard);
 
-            NodeList nList = doc.getElementsByTagName("player");
-
             Element rootElement = doc.getDocumentElement();
 
-            if(positionOfPlayerInXML(player)==-1) {
-                Element playerElement = doc.createElement("player");
+            Element scoreElement = doc.createElement("score");
 
-                Attr attr = doc.createAttribute("name");
-                attr.setValue(player);
-                playerElement.setAttributeNode(attr);
+            Attr attrName = doc.createAttribute("name");
+            attrName.setValue(score.getName());
+            scoreElement.setAttributeNode(attrName);
 
-                rootElement.appendChild(playerElement);
+            Attr attrPoints = doc.createAttribute("points");
+            attrPoints.setValue( String.valueOf(score.getScore()));
+            scoreElement.setAttributeNode(attrPoints);
 
-                Element scoreElement = doc.createElement("score");
-                scoreElement.appendChild(doc.createTextNode(String.valueOf(score)));
+            rootElement.appendChild(scoreElement);
 
-                playerElement.appendChild(scoreElement);
+            TransformerFactory tf = TransformerFactory.newInstance();
+            Transformer t = tf.newTransformer();
 
-            }else {
-                Element playerElement = (Element) nList.item(positionOfPlayerInXML(player));
-                Element scoreElement = doc.createElement("score");
-                scoreElement.appendChild(doc.createTextNode( String.valueOf(score)));
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(leaderBoard);
 
-                playerElement.appendChild(scoreElement);
+            t.transform(source, result);
 
-                rootElement.appendChild(playerElement);
-            }
-
-        } catch (SAXException | IOException e) {
+        } catch (SAXException | IOException | TransformerException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Returns a list of player and score pairs, which will build the leaderboard up.
-     * @return a list of player and score pairs.
+     * Returns a list of Score elements, which will build the leader board up.
+     * @return a list of Score elements.
      */
     @Override
-    public Map<String,List<Double> > readHighScoreTable() {
+    public List<Score> readHighScoreTable() {
 
-        Map<String,List<Double> > map = new HashMap<>();
+        List<Score> res = new ArrayList<>();
 
         try {
             doc = dBuilder.parse(leaderBoard);
-            NodeList nList = doc.getElementsByTagName("player");
+            NodeList nList = doc.getElementsByTagName("score");
 
             for(int i = 0; i< nList.getLength();i++) {
                 Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element playerElement = (Element) node;
                     String player = playerElement.getAttribute("name");
-                    List<Double> list = new ArrayList();
-                    NodeList scoreList = playerElement.getElementsByTagName("score");
-                    for(int j = 0; j< scoreList.getLength();j++) {
-                        Element score = (Element) scoreList.item(j);
-                        list.add(Double.parseDouble(score.getTextContent()));
-                    }
-                    map.put(player,list);
+                    double score = Double.parseDouble(playerElement.getAttribute("points"));
+
+                    res.add(new Score(player,score));
                 }
             }
-
-
         } catch (SAXException | IOException e) {
             e.printStackTrace();
         }
 
-        return map;
+        return res;
     }
 
     /**
-     * Returns the requested pre-shuffeled deck.
-     * @param n the n-th deck in the list of pre-shuffeled decks.
-     * @return the requested pre-shuffeled deck.
+     * Returns the requested pre-shuffled deck.
+     * @param n the n-th deck in the list of pre-shuffled decks.
+     * @return the requested pre-shuffled deck.
      */
     @Override
     public Deck readNextDeck(int n) {

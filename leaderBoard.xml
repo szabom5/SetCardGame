@@ -1,9 +1,5 @@
-<leaderBoard>
-    <player name="marica">
-        <score>10.0</score>
-        <score>9.25</score>
-    </player>
-    <player name="rohirrim">
-        <score>0.0</score>
-    </player>
-</leaderBoard>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><leaderBoard>
+    <score name="marica" points="10.0"/>
+    <score name="marica" points="9.25"/>
+    <score name="rohirrim" points="8.25"/>
+<score name="pipi" points="1708.0"/></leaderBoard>

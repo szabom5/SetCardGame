@@ -5,6 +5,7 @@ package hu.progtech.setcardgame.dao;
  */
 
 import hu.progtech.setcardgame.bl.Deck;
+import hu.progtech.setcardgame.bl.Score;
 
 import java.util.List;
 import java.util.Map;
@@ -18,23 +19,22 @@ public interface XMLHandler {
     /**
      * Writes into the leaderBoard xml file the score of the latest game.
      *
-     * @param score the score of the latest game.
-     * @param player the player who played the latest game.
+     * @param score the Score of the latest game.
      */
 
-    public void writeScore(double score, String player);
+    public void writeScore(Score score);
 
     /**
-     * Returns a map of players and list of scores, which will build the leaderboard up.
-     * @return a map with the name of the players as keys and the list of scores to each player.
+     * Returns a list of Score elements, which will build the leader board up.
+     * @return a list of Score elements.
      */
 
-    public Map<String,List<Double> > readHighScoreTable();
+    public List<Score> readHighScoreTable();
 
     /**
-     * Returns the requested pre-shuffeled deck.
-     * @param n the n-th deck in the list of pre-shuffeled decks.
-     * @return the requested pre-shuffeled deck.
+     * Returns the requested pre-shuffled deck.
+     * @param n the n-th deck in the list of pre-shuffled decks.
+     * @return the requested pre-shuffled deck.
      */
 
     public Deck readNextDeck(int n);

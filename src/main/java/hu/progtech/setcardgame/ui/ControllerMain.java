@@ -2,7 +2,10 @@ package hu.progtech.setcardgame.ui;
 
 import hu.progtech.setcardgame.bl.Card;
 import hu.progtech.setcardgame.bl.Deck;
+import hu.progtech.setcardgame.bl.Score;
 import hu.progtech.setcardgame.bl.SetOfCards;
+import hu.progtech.setcardgame.dao.XMLHandler;
+import hu.progtech.setcardgame.dao.XMLHandlerDOM;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -11,7 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -25,6 +30,8 @@ import java.util.*;
  * Created by marianna on 2016.04.15..
  */
 public class ControllerMain implements Initializable{
+
+    private XMLHandler h;
 
     private int numberOfSets;
 
@@ -190,11 +197,39 @@ public class ControllerMain implements Initializable{
         tPause.setDisable(true);
         tResume.setDisable(true);
         gridPaneDeck.setVisible(false);
+
+        pauseTimer();
+
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Save your score!");
+        dialog.setHeaderText("Your new score: "+lCounter);
+        dialog.setContentText("Please enter your name:");
+
+        Score score = new Score();
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            score.setName(result.get());
+        }
+        score.setScore(lCounter);
+
+        h.writeScore(score);
+
         stopTimer();
     }
 
     @FXML
     public void handleLeaderBoard(ActionEvent actionEvent) {
+        List<Score> list = h.readHighScoreTable();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Leader Board");
+        alert.setHeaderText("High Scores");
+        String fullLeaderBoard = "";
+        for(Score s : list) {
+            fullLeaderBoard = fullLeaderBoard.concat(s.toString()+"\n");
+        }
+        alert.setContentText(fullLeaderBoard);
+        alert.showAndWait();
     }
 
     @FXML
@@ -349,6 +384,8 @@ public class ControllerMain implements Initializable{
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        h = new XMLHandlerDOM();
+
         gridPaneDeck.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
                 System.out.println(oldSceneWidth+" "+newSceneWidth);
