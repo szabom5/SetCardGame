@@ -1,22 +1,48 @@
 package hu.progtech.setcardgame.bl;
 
+/**
+ * Created by marianna on 2016.04.10..
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by marianna on 2016.04.10..
+ * SetOfCards class represents a Set made up by three Cards.
  */
+
 public class SetOfCards {
 
+    /**
+     * A List containing the three Cards.
+     */
+
     private List<Card> cardSet;
+
+    /**
+     * Initializes a newly created SetOfCards object.
+     */
 
     public SetOfCards() {
         cardSet = new ArrayList<>();
     }
 
+    /**
+     * Constructs a new SetOfCards object by setting the value of the List of Cards.
+     * @param cardSet A List containing the three Cards
+
+     */
+
     public SetOfCards(List<Card> cardSet) {
         this.cardSet = cardSet;
     }
+
+    /**
+     * Constructs a new SetOfCards object by setting the value of the List of Cards with three Card objects.
+     * @param c1 A Card object
+     * @param c2 A Card object
+     * @param c3 A Card object
+     */
 
     public SetOfCards(Card c1, Card c2, Card c3) {
         cardSet = new ArrayList<>();
@@ -26,22 +52,45 @@ public class SetOfCards {
 
     }
 
+    /**
+     * Adds a Card object to the List of Cards if there is less than three Cards in it.
+     * @param card A Card object
+     */
+
     public void addCardtoSet(Card card) {
         if(cardSet.size()<3) {
             cardSet.add(card);
-        }/*else {
-            cardSet.clear();
-            cardSet.add(card);
-        }*/
+        }
     }
+
+    /**
+     * Compares three values of the same property of a Card.
+     * @param a The first value
+     * @param b The second value
+     * @param c The third value
+     * @return True if the three values are all different, false if not.
+     */
 
     private boolean isAllDiffrent(int a, int b, int c) {
         return (a != b && a != c && b != c)?true:false;
     }
 
+    /**
+     * Compares three values of the same property of a Card.
+     * @param a The first value
+     * @param b The second value
+     * @param c The third value
+     * @return True if the three values are all the same, false if not.
+     */
+
     private boolean isAllSame(int a, int b, int c) {
         return (a == b && a == c && b == b)?true:false;
     }
+
+    /**
+     * Returns true if the number properties of the three cards in the list are compatible to make a Set.
+     * @return Returns true if the number properties of the three cards in the list are compatible to make a Set, false if not
+     */
 
     private boolean isNumberValid() {
         if(
@@ -54,6 +103,11 @@ public class SetOfCards {
         return false;
     }
 
+    /**
+     * Returns true if the shape properties of the three cards in the list are compatible to make a Set.
+     * @return Returns true if the shape properties of the three cards in the list are compatible to make a Set, false if not
+     */
+
     private boolean isShapeValid() {
         if(
                 isAllDiffrent(cardSet.get(0).getShape(),cardSet.get(1).getShape(),cardSet.get(2).getShape())
@@ -64,6 +118,11 @@ public class SetOfCards {
         }
         return false;
     }
+
+    /**
+     * Returns true if the shading properties of the three cards in the list are compatible to make a Set.
+     * @return Returns true if the shading properties of the three cards in the list are compatible to make a Set, false if not
+     */
 
     private boolean isShadingValid() {
         if(
@@ -76,6 +135,11 @@ public class SetOfCards {
         return false;
     }
 
+    /**
+     * Returns true if the color properties of the three cards in the list are compatible to make a Set.
+     * @return Returns true if the color properties of the three cards in the list are compatible to make a Set, false if not
+     */
+
     private boolean isColorValid() {
         if(
                 isAllDiffrent(cardSet.get(0).getColor(),cardSet.get(1).getColor(),cardSet.get(2).getColor())
@@ -87,6 +151,11 @@ public class SetOfCards {
         return false;
     }
 
+    /**
+     * Returns true if the three Cards in the cardSet are compatible to form a Set and false if not.
+     * @return Returns true if the three Cards in the cardSet are compatible to form a Set, false if not
+     */
+
     public boolean isSet() {
         if(cardSet.size()==3) {
             if(isNumberValid() && isShapeValid() && isShadingValid() && isColorValid()) {
@@ -96,9 +165,19 @@ public class SetOfCards {
         return false;
     }
 
+    /**
+     * Returns the List of Cards.
+     * @return The List of Cards
+     */
+
     public List<Card> getCardSet() {
         return cardSet;
     }
+
+    /**
+     * Sets the list of Cards.
+     * @param cardSet The List of Cards
+     */
 
     public void setCardSet(List<Card> cardSet) {
         this.cardSet = cardSet;
