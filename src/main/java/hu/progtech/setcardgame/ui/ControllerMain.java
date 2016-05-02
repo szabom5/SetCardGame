@@ -33,7 +33,9 @@ public class ControllerMain implements Initializable{
 
     private XMLHandler h;
 
-    private int numberOfSets;
+    private int numberOfSetsFound;
+
+    private int numberOfHintUsed;
 
     private Canvas canvas;
 
@@ -147,6 +149,7 @@ public class ControllerMain implements Initializable{
         tHint.setDisable(false);
         gridPaneDeck.setVisible(true);
 
+        numberOfHintUsed = 0;
         deck = new Deck();
         cardsDisplayed = new ArrayList<>();
         setOfCards = new SetOfCards();
@@ -164,8 +167,8 @@ public class ControllerMain implements Initializable{
             }
         }
 
-        numberOfSets = 0;
-        lNumOfSets.setText( Integer.toString(numberOfSets));
+        numberOfSetsFound = 0;
+        lNumOfSets.setText( Integer.toString(numberOfSetsFound));
 
         stopTimer();
         startTimer();
@@ -200,9 +203,10 @@ public class ControllerMain implements Initializable{
 
         pauseTimer();
 
+        Double points = numberOfSetsFound*1000.0-numberOfHintUsed*90.0-lCounter/1000;
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Save your score!");
-        dialog.setHeaderText("Your new score: "+lCounter);
+        dialog.setHeaderText("Your new score: "+points);
         dialog.setContentText("Please enter your name:");
 
         Score score = new Score();
@@ -211,7 +215,7 @@ public class ControllerMain implements Initializable{
         if (result.isPresent()){
             score.setName(result.get());
         }
-        score.setScore(lCounter);
+        score.setScore(points);
 
         h.writeScore(score);
 
@@ -274,8 +278,8 @@ public class ControllerMain implements Initializable{
                 if(setOfCards.isSet()) {
                     clearBorder();
                     changeNewSet();
-                    numberOfSets++;
-                    lNumOfSets.setText( Integer.toString(numberOfSets));
+                    numberOfSetsFound++;
+                    lNumOfSets.setText( Integer.toString(numberOfSetsFound));
                 }else {
                     clearBorder();
                     setOfCards.getCardSet().clear();
@@ -359,6 +363,7 @@ public class ControllerMain implements Initializable{
 
    @FXML
    private void handleHint() {
+       numberOfHintUsed++;
        GraphicsContext gc;
        clearBorder();
        setOfCards.getCardSet().clear();
