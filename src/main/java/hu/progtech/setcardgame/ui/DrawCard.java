@@ -3,8 +3,6 @@ package hu.progtech.setcardgame.ui;
 import hu.progtech.setcardgame.bl.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
-
 
 /**
  * Created by marianna on 2016.04.09..

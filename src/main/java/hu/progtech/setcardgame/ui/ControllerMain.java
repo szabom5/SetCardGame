@@ -9,18 +9,18 @@ import hu.progtech.setcardgame.dao.XMLHandlerDOM;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
 
 import java.net.URL;
@@ -52,6 +52,11 @@ public class ControllerMain implements Initializable{
     private Timer timer = null;
 
     private TimerTask timerTask = null;
+
+    private TableView<Score> table = new TableView<Score>();
+
+    private ObservableList<Score> data =
+            FXCollections.observableArrayList();
 
     @FXML
     private GridPane gridPaneDeck;
@@ -230,40 +235,51 @@ public class ControllerMain implements Initializable{
         tSave.setDisable(true);
         tPause.setDisable(true);
         tResume.setDisable(true);
-        gridPaneDeck.setVisible(false);
+        tHint.setDisable(true);
+        //gridPaneDeck.setVisible(false);
 
         pauseTimer();
 
-        Double points = numberOfSetsFound*1000.0-numberOfHintUsed*90.0-lCounter/1000;
+        Score score = new Score();
+        score.setNumberOfSetsFound(numberOfSetsFound);
+        score.setNumberOfHintsUsed(numberOfHintUsed);
+        score.setTimeUsed(lCounter);
+        score.calculateScore();
+
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Save your score!");
-        dialog.setHeaderText("Your new score: "+points);
+        dialog.setHeaderText("Your new score: "+score.getScore());
         dialog.setContentText("Please enter your name:");
-
-        Score score = new Score();
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             score.setName(result.get());
+            h.writeScore(score);
         }
-        score.setScore(points);
-
-        h.writeScore(score);
 
         stopTimer();
     }
 
     @FXML
     public void handleLeaderBoard(ActionEvent actionEvent) {
+        stopTimer();
+        tRestart.setDisable(true);
+        tSave.setDisable(true);
+        tPause.setDisable(true);
+        tResume.setDisable(true);
+        tHint.setDisable(true);
+        //gridPaneDeck.setVisible(false);
+
         List<Score> list = h.readHighScoreTable();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Leader Board");
-        alert.setHeaderText("High Scores");
-        String fullLeaderBoard = "";
+        alert.setHeaderText("High scores");
+        alert.getDialogPane().setContent(table);
+        alert.getDialogPane().setMinWidth(410);
+
         for(Score s : list) {
-            fullLeaderBoard = fullLeaderBoard.concat(s.toString()+"\n");
+            data.add(s);
         }
-        alert.setContentText(fullLeaderBoard);
         alert.showAndWait();
     }
 
@@ -441,6 +457,22 @@ public class ControllerMain implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         h = new XMLHandlerDOM();
+
+        TableColumn nameCol = new TableColumn("Name");
+        nameCol.setMinWidth(200);
+        nameCol.setSortable(true);
+        nameCol.setCellValueFactory(
+                new PropertyValueFactory<>("name"));
+
+        TableColumn pointsCol = new TableColumn("Points");
+        pointsCol.setMinWidth(200);
+        pointsCol.setSortable(true);
+        pointsCol.setStyle( "-fx-alignment: CENTER-RIGHT;");
+        pointsCol.setCellValueFactory(
+                new PropertyValueFactory<>("score"));
+
+        table.setItems(data);
+        table.getColumns().addAll(nameCol, pointsCol);
 
         gridPaneDeck.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {

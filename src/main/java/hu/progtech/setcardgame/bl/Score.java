@@ -1,37 +1,42 @@
 package hu.progtech.setcardgame.bl;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * Created by marianna on 2016.05.02..
  */
 public class Score {
 
-    private String name;
+    private SimpleStringProperty name;
 
     private int numberOfSetsFound;
 
     private int numberOfHintsUsed;
 
-    private int timeUsed;
+    private long timeUsed;
 
-    private double score;
+    private SimpleDoubleProperty score;
 
     public Score() {
+        this.name = new SimpleStringProperty();
+        this.score = new SimpleDoubleProperty();
     }
 
     public Score(String name, double score) {
-        this.name = name;
-        this.score = score;
+        this.name = new SimpleStringProperty(name);
+        this.score = new SimpleDoubleProperty(score);
     }
 
     public Score(String name, int numberOfSetsFound, int numberOfHintsUsed, int timeUsed) {
-        this.name = name;
+        this.name = new SimpleStringProperty(name);
         this.numberOfSetsFound = numberOfSetsFound;
         this.numberOfHintsUsed = numberOfHintsUsed;
         this.timeUsed = timeUsed;
     }
 
     public void calculateScore() {
-        score = numberOfSetsFound*1000.0-numberOfHintsUsed*90.0-timeUsed/1000;
+        score = new SimpleDoubleProperty(numberOfSetsFound*1000.0-numberOfHintsUsed*90.0-timeUsed/1000);
     }
 
     public int getNumberOfSetsFound() {
@@ -50,28 +55,28 @@ public class Score {
         this.numberOfHintsUsed = numberOfHintsUsed;
     }
 
-    public int getTimeUsed() {
+    public long getTimeUsed() {
         return timeUsed;
     }
 
-    public void setTimeUsed(int timeUsed) {
+    public void setTimeUsed(long timeUsed) {
         this.timeUsed = timeUsed;
     }
 
     public String getName() {
-        return name;
+        return name.get();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     public double getScore() {
-        return score;
+        return score.get();
     }
 
     public void setScore(double score) {
-        this.score = score;
+        this.score.set(score);
     }
 
     @Override

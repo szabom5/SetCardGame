@@ -66,8 +66,8 @@ public class XMLHandlerDOM implements  XMLHandler{
 
     public XMLHandlerDOM() {
         try {
-            leaderBoard = new File("leaderBoard.xml");
-            listOfDecks = new File("listOfDecks.xml");
+            leaderBoard = new File("./src/main/resources/leaderBoard.xml");
+            listOfDecks = new File("./src/main/resources/listOfDecks.xml");
 
             dbFactory = DocumentBuilderFactory.newInstance();
 
