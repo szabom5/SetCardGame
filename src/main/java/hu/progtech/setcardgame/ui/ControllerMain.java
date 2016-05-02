@@ -280,6 +280,7 @@ public class ControllerMain implements Initializable{
         for(Score s : list) {
             data.add(s);
         }
+        data.sort((d1,d2) -> ((Double)(d2.getScore()-d1.getScore())).intValue());
         alert.showAndWait();
     }
 
