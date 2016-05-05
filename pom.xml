@@ -27,5 +27,5 @@
         </dependency>
     </dependencies>
     <name>SetCardGame</name>
-    <description> SetCardGame is an implementation of Set, a real-time card game designed by Marsha Falco in 1974 and published by Set Enterprises in 1991. </description>
+    <description> SetCardGame is an implementation of Set, a solitare card game designed by Marsha Falco in 1974 and published by Set Enterprises in 1991. </description>
 </project>

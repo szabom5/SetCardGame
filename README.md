@@ -1,4 +1,5 @@
 # SetCardGame
+
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/8673b57c78a6481ca31cc8e009a7df65)](https://www.codacy.com/app/szabo-marica/SetCardGame)
 ##Brief
 SetCardGame is a desktop application for Set, a real-time card game designed by Marsha Falco in 1974 and published by Set Enterprises in 1991. The deck consists of 81 cards varying in four features:
