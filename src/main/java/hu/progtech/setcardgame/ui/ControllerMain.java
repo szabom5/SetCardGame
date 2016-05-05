@@ -43,6 +43,8 @@ public class ControllerMain implements Initializable{
 
     private SetOfCards setOfCards;
 
+    private SetOfCards availableSets;
+
     private List<Card> cardsDisplayed;
 
     private DrawCard drawCard;
@@ -158,6 +160,7 @@ public class ControllerMain implements Initializable{
         deck = new Deck();
         cardsDisplayed = new ArrayList<>();
         setOfCards = new SetOfCards();
+        availableSets = new SetOfCards();
         GraphicsContext gc;
 
         drawCard = new DrawCard(canvas0.getGraphicsContext2D());
@@ -311,40 +314,55 @@ public class ControllerMain implements Initializable{
 
         if(setOfCards.getCardSet().contains(currentCard)) {
             setOfCards.removeFromSetOfCards(currentCard);
-            drawBorder(canvas,Color.BLACK);
+            redrawCard(currentCard);
         } else {
-            drawBorder(canvas,Color.CORAL);
-            setOfCards.addCardtoSet(currentCard);
+            if(setOfCards.getCardSet().size()<3) {
+                setOfCards.addCardtoSet(currentCard);
+                drawBorder(canvas,Color.CORAL);
+            }
             if(setOfCards.getCardSet().size()==3) {
                 if(setOfCards.isSet()) {
-                    clearBorder();
+                    clearSet();
                     changeNewSet();
                     numberOfSetsFound++;
                     lNumOfSets.setText( Integer.toString(numberOfSetsFound));
                 }else {
-                    clearBorder();
+                    clearSet();
                     setOfCards.getCardSet().clear();
                 }
             }
-
-        }
-
-    }
-
-    private void clearBorder() {
-        if(!setOfCards.getCardSet().isEmpty()) {
-            for (Card card : setOfCards.getCardSet()) {
-                canvas = (Canvas) gridPaneDeck.getChildren().get(cardsDisplayed.indexOf(card));
-                drawBorder(canvas,Color.BLACK);
-            }
         }
     }
+
+    private void redrawCard(Card card) {
+        GraphicsContext gc = ((Canvas) gridPaneDeck.getChildren().get(cardsDisplayed.indexOf(card))).getGraphicsContext2D();
+        drawCard.setGc(gc);
+        drawCard.setCard(card);
+        drawCard.draw();
+    }
+
+    private void clearSet() {
+        for(Card c : setOfCards.getCardSet()) {
+            GraphicsContext gc = ((Canvas) gridPaneDeck.getChildren().get(cardsDisplayed.indexOf(c))).getGraphicsContext2D();
+            drawCard.setGc(gc);
+            drawCard.setCard(c);
+            drawCard.draw();
+        }
+    }
+
 
     private void drawBorderForHint() {
         for(Card card: setOfCards.getCardSet()) {
             canvas = (Canvas)gridPaneDeck.getChildren().get(cardsDisplayed.indexOf(card));
             drawBorder(canvas,Color.DEEPPINK);
         }
+    }
+
+    private void drawBorder(Canvas c, Paint paint) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setLineWidth(10);
+        gc.setStroke(paint);
+        gc.strokeRoundRect(0, 0, c.getWidth(), c.getHeight(),50,50);
     }
 
     private void changeNewSet() {
@@ -367,7 +385,37 @@ public class ControllerMain implements Initializable{
             alert.showAndWait();
         }
     }
+
     private boolean checkAvailableSet() {
+        availableSets.getCardSet().clear();
+        for (int i = 0; i < 10; i++) {
+            for (int z = i + 1; z < 11; z++) {
+                for (int u = z + 1; u < 12; u++) {
+                    if (cardsDisplayed.get(i) == null || cardsDisplayed.get(z) == null || cardsDisplayed.get(u) == null)
+                    {
+                        continue;
+                    }
+                    availableSets.getCardSet().add(cardsDisplayed.get(i));
+                    availableSets.getCardSet().add(cardsDisplayed.get(z));
+                    availableSets.getCardSet().add(cardsDisplayed.get(u));
+
+                    if (availableSets.isSet()) {
+                        return true;
+                    } else {
+                        availableSets.getCardSet().clear();
+                    }
+                }
+            }
+
+        }
+        return false;
+    }
+
+    @FXML
+    private void handleHint() {
+        numberOfHintUsed++;
+        GraphicsContext gc;
+        clearSet();
         setOfCards.getCardSet().clear();
         for (int i = 0; i < 10; i++) {
             for (int z = i + 1; z < 11; z++) {
@@ -381,55 +429,17 @@ public class ControllerMain implements Initializable{
                     setOfCards.getCardSet().add(cardsDisplayed.get(u));
 
                     if (setOfCards.isSet()) {
-                        return true;
+                        drawBorderForHint();
+                        return;
                     } else {
                         setOfCards.getCardSet().clear();
+
                     }
                 }
             }
 
         }
-        return false;
-    }
-
-   @FXML
-   private void handleHint() {
-       numberOfHintUsed++;
-       GraphicsContext gc;
-       clearBorder();
-       setOfCards.getCardSet().clear();
-           for (int i = 0; i < 10; i++) {
-               for (int z = i + 1; z < 11; z++) {
-                   for (int u = z + 1; u < 12; u++) {
-                       if (cardsDisplayed.get(i) == null || cardsDisplayed.get(z) == null || cardsDisplayed.get(u) == null)
-                       {
-                           continue;
-                       }
-                       setOfCards.getCardSet().add(cardsDisplayed.get(i));
-                       setOfCards.getCardSet().add(cardsDisplayed.get(z));
-                       setOfCards.getCardSet().add(cardsDisplayed.get(u));
-
-                       if (setOfCards.isSet()) {
-                           drawBorderForHint();
-                           return;
-                       } else {
-                           setOfCards.getCardSet().clear();
-
-                       }
-                   }
-               }
-
-           }
-           lMsg.setText("No sets available!");
-   }
-
-    private void drawBorder(Canvas c, Paint paint) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.WHITE);
-        gc.strokeRoundRect(0, 0, c.getWidth(), c.getHeight(),50,50);
-        gc.setLineWidth(10);
-        gc.setStroke(paint);
-        gc.strokeRoundRect(0, 0, c.getWidth(), c.getHeight(),50,50);
+        lMsg.setText("No sets available!");
     }
 
     private void setGridWidthProperties(double width) {
@@ -490,4 +500,3 @@ public class ControllerMain implements Initializable{
     }
 
 }
-
