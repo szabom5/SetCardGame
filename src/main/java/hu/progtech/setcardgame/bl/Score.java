@@ -82,7 +82,7 @@ public class Score {
      */
 
     public void calculateScore() {
-        score = new SimpleDoubleProperty(numberOfSetsFound*1000.0-numberOfHintsUsed*90.0-timeUsed/1000);
+        score = new SimpleDoubleProperty(numberOfSetsFound*1000.0-numberOfHintsUsed*900.0-timeUsed/1000);
     }
 
     /**
