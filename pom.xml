@@ -8,6 +8,19 @@
     <version>1.0</version>
     <name>SetCardGame</name>
     <description> SetCardGame is an implementation of Set, a solitare card game designed by Marsha Falco in 1974 and published by Set Enterprises in 1991. </description>
+    <developers>
+        <developer>
+            <id>szabom5</id>
+            <name>Szabó Marianna</name>
+            <email>szabo.marica@gmail.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/szabom5/SetCardGame</url>
+    </scm>
     <build>
         <plugins>
             <plugin>
