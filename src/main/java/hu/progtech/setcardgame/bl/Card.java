@@ -1,48 +1,48 @@
 package hu.progtech.setcardgame.bl;
 
 /**
- * Card class represents a single Card of the Deck.
+ * {@code Card} class represents a single {@code Card} of the {@link hu.progtech.setcardgame.bl.Deck}.
  */
 
 public class Card {
 
     /**
-     * The number property of the Card.
+     * The {@code number} property of the {@code Card}.
      */
 
     private int number;
 
     /**
-     * The shape property of the Card.
+     * The {@code shape} property of the {@code Card}.
      */
 
     private int shape;
 
     /**
-     * The shading property of the Card.
+     * The {@code shading} property of the {@code Card}.
      */
 
     private int shading;
 
     /**
-     * The color property of the Card.
+     * The {@code color} property of the {@code Card}.
      */
 
     private int color;
 
     /**
-     * Initialises a newly created Card object.
+     * Initialises a newly created {@code Card} object.
      */
 
     public Card() {
     }
 
     /**
-     * Constructs a new Card object by setting all four properties.
-     * @param number The number property of the Card
-     * @param shape The shape property of the Card
-     * @param shading The shading property of the Card
-     * @param color The color property of the Card
+     * Constructs a new {@code Card} object by setting all four properties.
+     * @param number the {@code number} property of the {@code Card}.
+     * @param shape the {@code shape} property of the {@code Card}.
+     * @param shading the {@code shading} property of the {@code Card}.
+     * @param color the {@code color} property of the {@code Card}.
      */
 
     public Card(int number, int shape, int shading, int color) {
@@ -54,8 +54,8 @@ public class Card {
     }
 
     /**
-     * Returns the number property of the Card.
-     * @return The number property of the Card
+     * Returns the {@code number} property of the {@code Card}.
+     * @return the {@code number} property of the {@code Card}.
      */
 
     public int getNumber() {
@@ -63,8 +63,8 @@ public class Card {
     }
 
     /**
-     * Sets the number property of the Card.
-     * @param number The number property of the Card
+     * Sets the {@code number} property of the {@code Card}.
+     * @param number the {@code number} property of the {@code Card}.
      */
 
     public void setNumber(int number) {
@@ -72,8 +72,8 @@ public class Card {
     }
 
     /**
-     * Returns the shape property of the Card.
-     * @return The shape property of the Card
+     * Returns the {@code shape} property of the {@code Card}.
+     * @return the {@code shape} property of the {@code Card}.
      */
 
     public int getShape() {
@@ -81,8 +81,8 @@ public class Card {
     }
 
     /**
-     * Sets the shape property of hte Card.
-     * @param shape The shape property of the Card
+     * Sets the {@code Card} property of hte {@code Card}.
+     * @param shape the {@code Card} property of the {@code Card}
      */
 
     public void setShape(int shape) {
@@ -90,8 +90,8 @@ public class Card {
     }
 
     /**
-     * Returns the shading property of the Card.
-     * @return The shading property of the Card
+     * Returns the {@code shading} property of the {@code Card}.
+     * @return the {@code shading} property of the {@code Card}.
      */
 
     public int getShading() {
@@ -99,8 +99,8 @@ public class Card {
     }
 
     /**
-     * Sets the shading property of the Card.
-     * @param shading The shading property of the Card
+     * Sets the {@code shading} property of the {@code Card}.
+     * @param shading the {@code shading} property of the {@code Card}.
      */
 
     public void setShading(int shading) {
@@ -108,8 +108,8 @@ public class Card {
     }
 
     /**
-     * Returns the color property of the Card.
-     * @return The color property of the Card
+     * Returns the {@code color} property of the {@code Card}.
+     * @return the {@code color} property of the {@code Card}.
      */
 
     public int getColor() {
@@ -117,8 +117,8 @@ public class Card {
     }
 
     /**
-     * Sets the color property of the Card.
-     * @param color The color property of the Card
+     * Sets the {@code color} property of the {@code Card}.
+     * @param color the {@code color} property of the {@code Card}.
      */
 
     public void setColor(int color) {
