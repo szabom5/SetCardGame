@@ -2,7 +2,6 @@ package hu.progtech.setcardgame.dao;
 
 import hu.progtech.setcardgame.bl.Card;
 import hu.progtech.setcardgame.bl.Deck;
-
 import hu.progtech.setcardgame.bl.Score;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -11,7 +10,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -20,9 +18,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by marianna on 2016.04.16..
@@ -35,33 +31,33 @@ import java.util.Map;
 public class XMLHandlerDOM implements  XMLHandler{
 
     /**
-     * File to keep track of the high score of the players.
+     * {@link java.io.File} to keep track of the high score of the players.
      */
     private File leaderBoard;
     /**
-     * File to offer a pre-made series of shuffles to play.
+     * {@link java.io.File} to offer a pre-made series of shuffles to play.
      */
     private File listOfDecks;
 
     /**
-     * DocumentFactory for parsing the xml.
+     * {@link javax.xml.parsers.DocumentBuilderFactory} for parsing the xml.
      */
 
     private DocumentBuilderFactory dbFactory;
 
     /**
-     * DocumentBuilder for parsing the xml.
+     * {@link javax.xml.parsers.DocumentBuilder} for parsing the xml.
      */
 
     private DocumentBuilder dBuilder;
 
     /**
-     * Document for parsing the xml.
+     * {@link org.w3c.dom.Document} for parsing the xml.
      */
     private Document doc;
 
     /**
-     * Constructs a XMLHandlerDOM and sets the files for the class to use.
+     * Constructs a {@code XMLHandlerDOM} and sets the files for the class to use.
      */
 
     public XMLHandlerDOM() {
@@ -79,9 +75,7 @@ public class XMLHandlerDOM implements  XMLHandler{
     }
 
     /**
-     * Writes into the leaderBoard xml file the score of the latest game.
-     *
-     * @param score the Score of the latest game.
+     *{@inheritDoc}
      */
     @Override
     public void writeScore(Score score) {
@@ -116,8 +110,7 @@ public class XMLHandlerDOM implements  XMLHandler{
     }
 
     /**
-     * Returns a list of Score elements, which will build the leader board up.
-     * @return a list of Score elements.
+     * {@inheritDoc}
      */
     @Override
     public List<Score> readHighScoreTable() {
@@ -146,9 +139,7 @@ public class XMLHandlerDOM implements  XMLHandler{
     }
 
     /**
-     * Returns the requested pre-shuffled deck.
-     * @param n the n-th deck in the list of pre-shuffled decks.
-     * @return the requested pre-shuffled deck.
+     * {@inheritDoc}
      */
     @Override
     public Deck readNextDeck(int n) {
@@ -187,10 +178,7 @@ public class XMLHandlerDOM implements  XMLHandler{
     }
 
     /**
-     * Returns the position of the player in the sorted leaderBoard xml.
-     *
-     * @param player the subject of the search
-     * @return the position of the player element, if not found returns -1.
+     * {@inheritDoc}
      */
     @Override
     public int positionOfPlayerInXML(String player) {
@@ -208,9 +196,7 @@ public class XMLHandlerDOM implements  XMLHandler{
     }
 
     /**
-     * Writes n pre-shuffeled Decks into the listOfDecks.xml file.
-     *
-     * @param list the list of decks to be written into the xml.
+     * {@inheritDoc}
      */
     @Override
     public void writePreShuffeledDecks(List<Deck> list) {
