@@ -8,6 +8,7 @@
     <version>1.0</version>
     <name>SetCardGame</name>
     <description> SetCardGame is an implementation of Set, a solitare card game designed by Marsha Falco in 1974 and published by Set Enterprises in 1991. </description>
+    <url>https://github.com/szabom5/SetCardGame</url>
     <developers>
         <developer>
             <id>szabom5</id>
@@ -63,7 +64,7 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>2.17</version>
                 <configuration>
-                    <configLocation>checkstyle.xml</configLocation>
+                    <configLocation>src/main/resources/checkstyle.xml</configLocation>
                 </configuration>
             </plugin>
             <plugin>
