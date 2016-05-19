@@ -141,46 +141,7 @@ public class ControllerMain implements Initializable{
         }
     }
 
-    @FXML
-    public void handleNewGame(ActionEvent actionEvent) {
-        tRestart.setDisable(false);
-        tSave.setDisable(false);
-        tPause.setDisable(false);
-        tHint.setDisable(false);
-        gridPaneDeck.setVisible(true);
-
-        numberOfHintUsed = 0;
-        deck = new Deck();
-        cardsDisplayed = new ArrayList<>();
-        setOfCards = new SetOfCards();
-        availableSets = new SetOfCards();
-        GraphicsContext gc;
-
-        drawCard = new DrawCard(canvas0.getGraphicsContext2D());
-
-        for(int i = 0; i< 3;i++) {
-            for(int j = 0;j<4;j++) {
-                cardsDisplayed.add(deck.getNextCard());
-                gc = ((Canvas) gridPaneDeck.getChildren().get(i*4+j)).getGraphicsContext2D();
-                drawCard.setGc(gc);
-                drawCard.setCard(cardsDisplayed.get(cardsDisplayed.size()-1));
-                drawCard.draw();
-            }
-        }
-
-        numberOfSetsFound = 0;
-        lNumOfSets.setText( Integer.toString(numberOfSetsFound));
-
-        stopTimer();
-        startTimer();
-
-        lMsg.setText("");
-        lMsg.setTextFill(Color.DARKRED);
-
-    }
-
-    @FXML
-    public void handleRestart(ActionEvent actionEvent) {
+    public void resetGame(){
         tRestart.setDisable(false);
         tSave.setDisable(false);
         tPause.setDisable(false);
@@ -190,6 +151,7 @@ public class ControllerMain implements Initializable{
         numberOfHintUsed = 0;
         cardsDisplayed.clear();
         setOfCards.getCardSet().clear();
+        availableSets.getCardSet().clear();
         GraphicsContext gc;
         drawCard = new DrawCard(canvas0.getGraphicsContext2D());
         deck.resetNextCard();
@@ -212,6 +174,21 @@ public class ControllerMain implements Initializable{
 
         lMsg.setText("");
         lMsg.setTextFill(Color.DARKRED);
+    }
+
+    @FXML
+    public void handleNewGame(ActionEvent actionEvent) {
+        deck = new Deck();
+        cardsDisplayed = new ArrayList<>();
+        setOfCards = new SetOfCards();
+        availableSets = new SetOfCards();
+
+        resetGame();
+    }
+
+    @FXML
+    public void handleRestart(ActionEvent actionEvent) {
+        resetGame();
     }
 
     @FXML
