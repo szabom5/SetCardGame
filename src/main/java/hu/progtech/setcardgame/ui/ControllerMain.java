@@ -18,6 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.*;
@@ -27,7 +29,7 @@ import java.util.*;
  */
 public class ControllerMain implements Initializable{
 
-    private DeckDao deckDao;
+    private static final Logger logger = LoggerFactory.getLogger(ControllerMain.class);
 
     private ScoreDao scoreDao;
 
@@ -109,7 +111,8 @@ public class ControllerMain implements Initializable{
                 });
             }
         };
-        timer.schedule(timerTask, 10, 10); //millisec mennyi idonkent frissitse
+        timer.schedule(timerTask, 10, 10);
+        logger.info("Started the timer");
     }
 
     private void stopTimer() {
@@ -117,12 +120,14 @@ public class ControllerMain implements Initializable{
         if(timerTask != null) timerTask.cancel();
         lCounter = 0;
         lTime.setText(formatTimer(lCounter));
+        logger.info("Stopped the timer");
     }
 
     private void pauseTimer() {
         if(timer != null) timer.cancel();
         if(timerTask != null) timerTask.cancel();
         lTime.setText(formatTimer(lCounter));
+        logger.info("Paused the timer");
     }
 
     private void refresh() {
@@ -184,11 +189,13 @@ public class ControllerMain implements Initializable{
         availableSets = new SetOfCards();
 
         resetGame();
+        logger.info("Started a new game");
     }
 
     @FXML
     public void handleRestart(ActionEvent actionEvent) {
         resetGame();
+        logger.info("Restarted the game");
     }
 
     @FXML
@@ -197,7 +204,7 @@ public class ControllerMain implements Initializable{
         alert.setTitle("Rules");
         alert.setHeaderText("How to play the Set Card Game");
         alert.setContentText("Rules");
-
+        logger.info("Rules menuItem selected");
         alert.showAndWait();
     }
 
@@ -212,6 +219,8 @@ public class ControllerMain implements Initializable{
         //gridPaneDeck.setVisible(false);
 
         pauseTimer();
+
+        logger.info("Saving the game");
 
         Score score = new Score();
         score.setNumberOfSetsFound(numberOfSetsFound);
@@ -241,7 +250,7 @@ public class ControllerMain implements Initializable{
         tPause.setDisable(true);
         tResume.setDisable(true);
         tHint.setDisable(true);
-
+        logger.info("LeaderBoard menuItem selected");
         List<Score> list = scoreDao.readHighScoreTable();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Leader Board");
@@ -258,18 +267,18 @@ public class ControllerMain implements Initializable{
     public void handleResume(ActionEvent actionEvent) {
         tPause.setDisable(false);
         tResume.setDisable(true);
-
+        logger.info("Resume the game");
         gridPaneDeck.setVisible(true);
         startTimer();
     }
 
     @FXML
     public void handlePause(ActionEvent actionEvent) {
+        pauseTimer();
         tResume.setDisable(false);
         tPause.setDisable(true);
-
         gridPaneDeck.setVisible(false);
-        pauseTimer();
+        logger.info("Paused the game");
     }
 
 
@@ -277,7 +286,9 @@ public class ControllerMain implements Initializable{
     protected void drawClicked(MouseEvent me) {
         canvas = (Canvas) me.getSource();
 
-        Card currentCard = cardsDisplayed.get(gridPaneDeck.getRowIndex(canvas)*4+gridPaneDeck.getColumnIndex(canvas));
+        Card currentCard = cardsDisplayed.get(GridPane.getRowIndex(canvas)*4+ GridPane.getColumnIndex(canvas));
+
+        logger.info("Clicked on card: "+currentCard.toString());
 
         if(setOfCards.getCardSet().contains(currentCard)) {
             setOfCards.removeFromSetOfCards(currentCard);
@@ -289,12 +300,12 @@ public class ControllerMain implements Initializable{
             }
             if(setOfCards.getCardSet().size()==3) {
                 if(setOfCards.isSet()) {
-                    clearSet();
+                    clearSetBorder();
                     changeNewSet();
                     numberOfSetsFound++;
                     lNumOfSets.setText( Integer.toString(numberOfSetsFound));
                 }else {
-                    clearSet();
+                    clearSetBorder();
                     setOfCards.getCardSet().clear();
                 }
             }
@@ -308,7 +319,7 @@ public class ControllerMain implements Initializable{
         drawCard.draw();
     }
 
-    private void clearSet() {
+    private void clearSetBorder() {
         for(Card c : setOfCards.getCardSet()) {
             GraphicsContext gc = ((Canvas) gridPaneDeck.getChildren().get(cardsDisplayed.indexOf(c))).getGraphicsContext2D();
             drawCard.setGc(gc);
@@ -354,6 +365,7 @@ public class ControllerMain implements Initializable{
     }
 
     private boolean checkAvailableSet() {
+        logger.info("Checking for available sets");
         availableSets.getCardSet().clear();
         availableSets=deck.hint(cardsDisplayed);
         return !(availableSets.getCardSet().isEmpty());
@@ -361,12 +373,13 @@ public class ControllerMain implements Initializable{
 
     @FXML
     private void handleHint() {
+        logger.info("Hint");
         numberOfHintUsed++;
-        clearSet();
+        clearSetBorder();
         setOfCards.getCardSet().clear();
 
         setOfCards = deck.hint(cardsDisplayed);
-
+        setOfCards.getCardSet().stream().forEach((x) -> logger.debug("{}",x));
         if(setOfCards.getCardSet().isEmpty()){
             lMsg.setText("No sets available!");
         }else{
@@ -396,7 +409,6 @@ public class ControllerMain implements Initializable{
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        deckDao = new DeckDaoDOM("listOfDecks.xml");
         scoreDao = new ScoreDaoDOM("leaderBoard.xml");
 
         TableColumn nameCol = new TableColumn("Name");

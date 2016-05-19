@@ -8,26 +8,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main extends Application {
+
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        final Parent rootparent = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
+        final Parent rootParent = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
 
-        Scene scene = new Scene(rootparent, 750, 600);
+        Scene scene = new Scene(rootParent, 750, 600);
 
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.exit();
-            }
-        });
+        primaryStage.setOnCloseRequest(event -> Platform.exit());
 
         primaryStage.setTitle("SetCardGame");
         primaryStage.setScene(scene);
 
+        logger.info("The application started!");
         primaryStage.show();
     }
     public static void main(String[] args) {

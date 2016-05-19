@@ -149,7 +149,7 @@ public class CardTest {
 
     @Test
     public void testToString() throws Exception {
-        Card card = new Card(0,1,2,0); // you didn't supply the object, so I guessed
+        Card card = new Card(0,1,2,0);
         String expected = "Card{color=0, shape=1, shading=2, number=0}\n";
         assertEquals(expected, card.toString());
     }

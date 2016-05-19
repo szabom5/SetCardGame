@@ -1,6 +1,8 @@
 package hu.progtech.setcardgame.dao;
 
 import hu.progtech.setcardgame.bl.Score;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -22,6 +24,8 @@ import java.util.List;
  */
 
 public class ScoreDaoDOM implements ScoreDao {
+
+    private static final Logger logger = LoggerFactory.getLogger(ScoreDaoDOM.class);
 
     /**
      * {@link java.io.File} to keep track of the high score of the players.
@@ -70,6 +74,7 @@ public class ScoreDaoDOM implements ScoreDao {
      */
     @Override
     public void writeScore(Score score) {
+        logger.info("Write score into file: "+score.toString());
         try {
             doc = dBuilder.parse(leaderBoard);
 
@@ -96,7 +101,7 @@ public class ScoreDaoDOM implements ScoreDao {
             t.transform(source, result);
 
         } catch (SAXException | IOException | TransformerException e) {
-            e.printStackTrace();
+            logger.error("Exception: "+e.getMessage());
         }
     }
 
@@ -123,7 +128,7 @@ public class ScoreDaoDOM implements ScoreDao {
                 }
             }
         } catch (SAXException | IOException e) {
-            e.printStackTrace();
+            logger.error("Exception: "+e.getMessage());
         }
 
         return res;
@@ -166,7 +171,7 @@ public class ScoreDaoDOM implements ScoreDao {
                     t.transform(source, result);
                 }
             } catch (SAXException | IOException | TransformerException e) {
-                e.printStackTrace();
+                logger.error("Exception: "+e.getMessage());
             }
         }else{
             try {
@@ -185,7 +190,7 @@ public class ScoreDaoDOM implements ScoreDao {
                 t.transform(source, result);
 
             } catch (TransformerException e) {
-                e.printStackTrace();
+                logger.error("Exception: "+e.getMessage());
             }
         }
     }
