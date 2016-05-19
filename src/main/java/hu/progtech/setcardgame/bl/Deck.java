@@ -1,16 +1,12 @@
 package hu.progtech.setcardgame.bl;
 
-/**
- * Created by marianna on 2016.04.09..
- */
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 /**
- * Deck class represents the deck of Cards.
+ * {@code Deck} class represents the deck of Cards.
  */
 
 public class Deck {
@@ -89,11 +85,42 @@ public class Deck {
     }
 
     /**
-     * Shuffeles the deck, rearranging the Cards in a random order.
+     * Shuffles the deck, rearranging the Cards in a random order.
      */
 
     private void suffleAllCards() {
         Collections.shuffle(deck,new Random());
+    }
+
+    /**
+     * Search for possible sets in a list of {@link hu.progtech.setcardgame.bl.Card}s.
+     * @param list The list of card to search in
+     * @return A {@link hu.progtech.setcardgame.bl.SetOfCards} if a set is found, else null
+     */
+
+    public SetOfCards hint(List<Card> list){
+        SetOfCards setOfCards = new SetOfCards();
+
+        for (int i = 0; i < 10; i++) {
+            for (int z = i + 1; z < 11; z++) {
+                for (int u = z + 1; u < 12; u++) {
+                    if (list.get(i) == null || list.get(z) == null || list.get(u) == null)
+                    {
+                        continue;
+                    }
+                    setOfCards.getCardSet().add(list.get(i));
+                    setOfCards.getCardSet().add(list.get(z));
+                    setOfCards.getCardSet().add(list.get(u));
+
+                    if (setOfCards.isSet()) {
+                        return setOfCards;
+                    } else {
+                        setOfCards.getCardSet().clear();
+                    }
+                }
+            }
+        }
+        return setOfCards;
     }
 
     /**

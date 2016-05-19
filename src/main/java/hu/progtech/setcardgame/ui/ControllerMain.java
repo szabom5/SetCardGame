@@ -7,7 +7,6 @@ import hu.progtech.setcardgame.bl.SetOfCards;
 import hu.progtech.setcardgame.dao.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -379,73 +378,35 @@ public class ControllerMain implements Initializable{
 
     private boolean checkAvailableSet() {
         availableSets.getCardSet().clear();
-        for (int i = 0; i < 10; i++) {
-            for (int z = i + 1; z < 11; z++) {
-                for (int u = z + 1; u < 12; u++) {
-                    if (cardsDisplayed.get(i) == null || cardsDisplayed.get(z) == null || cardsDisplayed.get(u) == null)
-                    {
-                        continue;
-                    }
-                    availableSets.getCardSet().add(cardsDisplayed.get(i));
-                    availableSets.getCardSet().add(cardsDisplayed.get(z));
-                    availableSets.getCardSet().add(cardsDisplayed.get(u));
-
-                    if (availableSets.isSet()) {
-                        return true;
-                    } else {
-                        availableSets.getCardSet().clear();
-                    }
-                }
-            }
-
-        }
-        return false;
+        availableSets=deck.hint(cardsDisplayed);
+        return !(availableSets.getCardSet().isEmpty());
     }
 
     @FXML
     private void handleHint() {
         numberOfHintUsed++;
-        GraphicsContext gc;
         clearSet();
         setOfCards.getCardSet().clear();
-        for (int i = 0; i < 10; i++) {
-            for (int z = i + 1; z < 11; z++) {
-                for (int u = z + 1; u < 12; u++) {
-                    if (cardsDisplayed.get(i) == null || cardsDisplayed.get(z) == null || cardsDisplayed.get(u) == null)
-                    {
-                        continue;
-                    }
-                    setOfCards.getCardSet().add(cardsDisplayed.get(i));
-                    setOfCards.getCardSet().add(cardsDisplayed.get(z));
-                    setOfCards.getCardSet().add(cardsDisplayed.get(u));
 
-                    if (setOfCards.isSet()) {
-                        drawBorderForHint();
-                        return;
-                    } else {
-                        setOfCards.getCardSet().clear();
+        setOfCards = deck.hint(cardsDisplayed);
 
-                    }
-                }
-            }
-
+        if(setOfCards.getCardSet().isEmpty()){
+            lMsg.setText("No sets available!");
+        }else{
+            drawBorderForHint();
         }
-        lMsg.setText("No sets available!");
     }
 
     private void setGridWidthProperties(double width) {
         for(int i = 0; i< 12;i++) {
             ((Canvas) gridPaneDeck.getChildren().get(i)).setWidth(width / 5);
-
         }
-
     }
 
     private void setGridHeightProperties(double height) {
         for(int i = 0; i< 12;i++) {
             ((Canvas) gridPaneDeck.getChildren().get(i)).setHeight(height / 4);
         }
-
     }
 
     /**
