@@ -4,11 +4,8 @@ import hu.progtech.setcardgame.bl.Card;
 import hu.progtech.setcardgame.bl.Deck;
 import hu.progtech.setcardgame.bl.Score;
 import hu.progtech.setcardgame.bl.SetOfCards;
-import hu.progtech.setcardgame.dao.XMLHandler;
-import hu.progtech.setcardgame.dao.XMLHandlerDOM;
+import hu.progtech.setcardgame.dao.*;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,7 +28,9 @@ import java.util.*;
  */
 public class ControllerMain implements Initializable{
 
-    private XMLHandler h;
+    private DeckDao deckDao;
+
+    private ScoreDao scoreDao;
 
     private int numberOfSetsFound;
 
@@ -108,11 +107,9 @@ public class ControllerMain implements Initializable{
 
             @Override
             public void run() {
-                Platform.runLater(new Runnable() {
-                    public void run() {
-                        lTime.setText(formatTimer(lCounter));
-                        lCounter++;
-                    }
+                Platform.runLater(() -> {
+                    lTime.setText(formatTimer(lCounter));
+                    lCounter++;
                 });
             }
         };
@@ -257,7 +254,7 @@ public class ControllerMain implements Initializable{
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             score.setName(result.get());
-            h.writeScore(score);
+            scoreDao.writeScore(score);
         }
 
         stopTimer();
@@ -273,7 +270,7 @@ public class ControllerMain implements Initializable{
         tHint.setDisable(true);
         //gridPaneDeck.setVisible(false);
 
-        List<Score> list = h.readHighScoreTable();
+        List<Score> list = scoreDao.readHighScoreTable();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Leader Board");
         alert.setHeaderText("High scores");
@@ -467,7 +464,8 @@ public class ControllerMain implements Initializable{
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        h = new XMLHandlerDOM();
+        deckDao = new DeckDaoDOM();
+        scoreDao = new ScoreDaoDOM();
 
         TableColumn nameCol = new TableColumn("Name");
         nameCol.setMinWidth(200);
@@ -485,17 +483,13 @@ public class ControllerMain implements Initializable{
         table.setItems(data);
         table.getColumns().addAll(nameCol, pointsCol);
 
-        gridPaneDeck.widthProperty().addListener(new ChangeListener<Number>() {
-            @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                setGridWidthProperties(newSceneWidth.doubleValue());
-                refresh();
-            }
+        gridPaneDeck.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
+            setGridWidthProperties(newSceneWidth.doubleValue());
+            refresh();
         });
-        gridPaneDeck.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                setGridHeightProperties(newSceneHeight.doubleValue());
-                refresh();
-            }
+        gridPaneDeck.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
+            setGridHeightProperties(newSceneHeight.doubleValue());
+            refresh();
         });
     }
 
