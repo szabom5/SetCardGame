@@ -56,9 +56,6 @@ public class ControllerMain implements Initializable{
 
     private TableView<Score> table = new TableView<Score>();
 
-    private ObservableList<Score> data =
-            FXCollections.observableArrayList();
-
     @FXML
     private GridPane gridPaneDeck;
 
@@ -268,7 +265,6 @@ public class ControllerMain implements Initializable{
         tPause.setDisable(true);
         tResume.setDisable(true);
         tHint.setDisable(true);
-        //gridPaneDeck.setVisible(false);
 
         List<Score> list = scoreDao.readHighScoreTable();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -277,10 +273,8 @@ public class ControllerMain implements Initializable{
         alert.getDialogPane().setContent(table);
         alert.getDialogPane().setMinWidth(410);
 
-        for(Score s : list) {
-            data.add(s);
-        }
-        data.sort((d1,d2) -> ((Double)(d2.getScore()-d1.getScore())).intValue());
+        list.sort(Comparator.comparing(Score::getScore));
+        table.getItems().setAll(list);
         alert.showAndWait();
     }
 
@@ -464,8 +458,8 @@ public class ControllerMain implements Initializable{
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        deckDao = new DeckDaoDOM();
-        scoreDao = new ScoreDaoDOM();
+        deckDao = new DeckDaoDOM("listOfDecks.xml");
+        scoreDao = new ScoreDaoDOM("leaderBoard.xml");
 
         TableColumn nameCol = new TableColumn("Name");
         nameCol.setMinWidth(200);
@@ -480,7 +474,7 @@ public class ControllerMain implements Initializable{
         pointsCol.setCellValueFactory(
                 new PropertyValueFactory<>("score"));
 
-        table.setItems(data);
+        table.setItems(FXCollections.observableArrayList());
         table.getColumns().addAll(nameCol, pointsCol);
 
         gridPaneDeck.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {

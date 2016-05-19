@@ -46,16 +46,18 @@ public class ScoreDaoDOM implements ScoreDao {
     private Document doc;
 
     /**
-     * Constructs a {@code XMLHandlerDOM} and sets the file for the class to use.
+     * Constructs a {@code ScoreDaoDOM} and sets the file for the class to use.
      */
 
-    public ScoreDaoDOM() {
+    public ScoreDaoDOM(String filename) {
         try {
-            leaderBoard = new File("./src/main/resources/leaderBoard.xml");
+            leaderBoard = new File(filename);
 
             dbFactory = DocumentBuilderFactory.newInstance();
 
             dBuilder = dbFactory.newDocumentBuilder();
+
+            createOrReplace();
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -142,6 +144,49 @@ public class ScoreDaoDOM implements ScoreDao {
             }
         }
         return -1;
+    }
+
+    private void createOrReplace(){
+        if(leaderBoard.exists()){
+            try {
+                doc = dBuilder.parse(leaderBoard);
+                if(doc.getDocumentElement().getTagName().equals("leaderBoard")){
+                    return;
+                }else{
+                    Element rootElement = doc.createElement("leaderBoard");
+                    doc.appendChild(rootElement);
+
+                    TransformerFactory tf = TransformerFactory.newInstance();
+                    Transformer t = tf.newTransformer();
+
+                    DOMSource source = new DOMSource(doc);
+                    StreamResult result = new StreamResult(leaderBoard);
+
+                    t.transform(source, result);
+                }
+            } catch (SAXException | IOException | TransformerException e) {
+                e.printStackTrace();
+            }
+        }else{
+            try {
+                doc = dBuilder.newDocument();
+
+                Element rootElement = doc.createElement("leaderBoard");
+
+                doc.appendChild(rootElement);
+
+                TransformerFactory tf = TransformerFactory.newInstance();
+                Transformer t = tf.newTransformer();
+
+                DOMSource source = new DOMSource(doc);
+                StreamResult result = new StreamResult(leaderBoard);
+
+                t.transform(source, result);
+
+            } catch (TransformerException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

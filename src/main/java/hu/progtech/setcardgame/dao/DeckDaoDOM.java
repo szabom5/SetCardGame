@@ -49,9 +49,9 @@ public class DeckDaoDOM implements DeckDao {
      * Constructs a {@code DeckDaoDOM} and sets the file for the class to use.
      */
 
-    public DeckDaoDOM() {
+    public DeckDaoDOM(String filename) {
         try {
-            listOfDecks = new File("./src/main/resources/listOfDecks.xml");
+            listOfDecks = new File(filename);
 
             dbFactory = DocumentBuilderFactory.newInstance();
 
@@ -100,8 +100,6 @@ public class DeckDaoDOM implements DeckDao {
 
         return new Deck(deck);
     }
-
-
 }
 
 
