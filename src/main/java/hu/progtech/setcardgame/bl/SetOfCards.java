@@ -1,9 +1,5 @@
 package hu.progtech.setcardgame.bl;
 
-/**
- * Created by marianna on 2016.04.10..
- */
-
 import java.util.ArrayList;
 import java.util.List;
 

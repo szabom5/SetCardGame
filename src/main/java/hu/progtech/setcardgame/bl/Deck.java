@@ -6,36 +6,36 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * {@code Deck} class represents the deck of Cards.
+ * {@code Deck} class represents the deck of {@link hu.progtech.setcardgame.bl.Card}s.
  */
 
 public class Deck {
 
     /**
-     * The List of Cards to maintain the deck.
+     * The {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s to maintain the deck.
      */
 
     private List<Card> deck = new ArrayList<>();
 
     /**
-     * The index of the next Card to be placed on the board.
+     * The index of the next {@link hu.progtech.setcardgame.bl.Card} to be placed on the board.
      */
 
     private int indexOfNextCard;
 
     /**
-     * Initialises a newly created Deck object.
+     * Initialises a newly created {@code Deck} object.
      */
 
     public Deck() {
         makeNewDeck();
-        suffleAllCards();
+        shuffleAllCards();
         indexOfNextCard = 0;
     }
 
     /**
-     * Constructs a new Deck object by setting the list of Cards and resetting the index.
-     * @param list The List of Cards to maintain the deck
+     * Constructs a new {@code Deck} object by setting the list of {@link hu.progtech.setcardgame.bl.Card}s and resetting the index.
+     * @param list The List of {@link hu.progtech.setcardgame.bl.Card}s to maintain the deck
      */
 
     public Deck(List<Card> list) {
@@ -44,8 +44,8 @@ public class Deck {
     }
 
     /**
-     * Returns the next Card to be placed onto the Board.
-     * @return The next Card to be placed
+     * Returns the next {@link hu.progtech.setcardgame.bl.Card} to be placed onto the Board.
+     * @return The next {@link hu.progtech.setcardgame.bl.Card} to be placed
      */
 
     public Card getNextCard() {
@@ -59,7 +59,7 @@ public class Deck {
     }
 
     /**
-     * Resets the index of the next Card to be placed.
+     * Resets the index of the next {@link hu.progtech.setcardgame.bl.Card} to be placed.
      */
 
     public void resetNextCard() {
@@ -67,7 +67,7 @@ public class Deck {
     }
 
     /**
-     * Fills the deck with all the 81 Cards that can be found in the Set Card Game.
+     * Fills the deck with all the 81 {@link hu.progtech.setcardgame.bl.Card}s that can be found in the Set Card Game.
      */
 
     private void makeNewDeck() {
@@ -85,10 +85,10 @@ public class Deck {
     }
 
     /**
-     * Shuffles the deck, rearranging the Cards in a random order.
+     * Shuffles the deck, rearranging the cards in a random order.
      */
 
-    private void suffleAllCards() {
+    private void shuffleAllCards() {
         Collections.shuffle(deck,new Random());
     }
 
@@ -124,8 +124,8 @@ public class Deck {
     }
 
     /**
-     * Returns the list of Cards represented.
-     * @return The list of Cards
+     * Returns the list of {@link hu.progtech.setcardgame.bl.Card}s represented.
+     * @return The list of {@link hu.progtech.setcardgame.bl.Card}s
      */
 
     public List<Card> getDeck() {
