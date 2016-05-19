@@ -98,7 +98,7 @@ public class Deck {
      * @return A {@link hu.progtech.setcardgame.bl.SetOfCards} if a set is found, else null
      */
 
-    public SetOfCards hint(List<Card> list){
+    public static SetOfCards hint(List<Card> list){
         SetOfCards setOfCards = new SetOfCards();
 
         for (int i = 0; i < 10; i++) {

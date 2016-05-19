@@ -152,8 +152,8 @@ public class Card {
     public String toString() {
         return "Card{" +
                 "color=" + color +
-                ", shading=" + shading +
                 ", shape=" + shape +
+                ", shading=" + shading +
                 ", number=" + number +
                 "}\n";
     }
