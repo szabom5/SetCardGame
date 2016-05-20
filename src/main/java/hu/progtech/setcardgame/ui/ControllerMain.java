@@ -24,9 +24,6 @@ import org.slf4j.LoggerFactory;
 import java.net.URL;
 import java.util.*;
 
-/**
- * Created by marianna on 2016.04.15..
- */
 public class ControllerMain implements Initializable{
 
     private static final Logger logger = LoggerFactory.getLogger(ControllerMain.class);
@@ -55,7 +52,7 @@ public class ControllerMain implements Initializable{
 
     private TimerTask timerTask = null;
 
-    private TableView<Score> table = new TableView<Score>();
+    private TableView<Score> table = new TableView<>();
 
     @FXML
     private GridPane gridPaneDeck;
@@ -87,8 +84,12 @@ public class ControllerMain implements Initializable{
     @FXML
     private Label lMsg;
 
-    private String formatTimer(long time) {
-        long hours, minutes,seconds,milliseconds;
+    private String formatTimer(long p_time) {
+        long hours;
+        long minutes;
+        long seconds;
+        long milliseconds;
+        long time = p_time;
         milliseconds = time % 100;
         time/=100;
         seconds = time % 60;
@@ -367,18 +368,18 @@ public class ControllerMain implements Initializable{
     private boolean checkAvailableSet() {
         logger.info("Checking for available sets");
         availableSets.getCardSet().clear();
-        availableSets=deck.hint(cardsDisplayed);
+        availableSets= Deck.hint(cardsDisplayed);
         return !(availableSets.getCardSet().isEmpty());
     }
 
     @FXML
-    private void handleHint() {
+    public void handleHint() {
         logger.info("Hint");
         numberOfHintUsed++;
         clearSetBorder();
         setOfCards.getCardSet().clear();
 
-        setOfCards = deck.hint(cardsDisplayed);
+        setOfCards = Deck.hint(cardsDisplayed);
         setOfCards.getCardSet().stream().forEach((x) -> logger.debug("{}",x));
         if(setOfCards.getCardSet().isEmpty()){
             lMsg.setText("No sets available!");

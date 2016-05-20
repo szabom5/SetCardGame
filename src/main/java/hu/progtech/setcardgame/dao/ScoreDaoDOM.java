@@ -33,12 +33,6 @@ public class ScoreDaoDOM implements ScoreDao {
     private File leaderBoard;
 
     /**
-     * {@link javax.xml.parsers.DocumentBuilderFactory} for parsing the xml.
-     */
-
-    private DocumentBuilderFactory dbFactory;
-
-    /**
      * {@link javax.xml.parsers.DocumentBuilder} for parsing the xml.
      */
 
@@ -58,7 +52,7 @@ public class ScoreDaoDOM implements ScoreDao {
         try {
             leaderBoard = new File(filename);
 
-            dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
             dBuilder = dbFactory.newDocumentBuilder();
 

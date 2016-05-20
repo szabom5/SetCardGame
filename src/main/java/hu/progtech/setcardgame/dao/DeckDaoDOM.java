@@ -28,21 +28,10 @@ public class DeckDaoDOM implements DeckDao {
     private File listOfDecks;
 
     /**
-     * {@link javax.xml.parsers.DocumentBuilderFactory} for parsing the xml.
-     */
-
-    private DocumentBuilderFactory dbFactory;
-
-    /**
      * {@link javax.xml.parsers.DocumentBuilder} for parsing the xml.
      */
 
     private DocumentBuilder dBuilder;
-
-    /**
-     * {@link org.w3c.dom.Document} for parsing the xml.
-     */
-    private Document doc;
 
 
     /**
@@ -54,7 +43,7 @@ public class DeckDaoDOM implements DeckDao {
         try {
             listOfDecks = new File(filename);
 
-            dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
             dBuilder = dbFactory.newDocumentBuilder();
 
@@ -72,7 +61,8 @@ public class DeckDaoDOM implements DeckDao {
         List<Card> deck = new ArrayList<>();
 
         try {
-            doc = dBuilder.parse(listOfDecks);
+
+            Document doc = dBuilder.parse(listOfDecks);
             NodeList deckList = doc.getElementsByTagName("Deck");
             if (deckList.item(n).getNodeType() == Node.ELEMENT_NODE) {
 

@@ -137,14 +137,10 @@ public class SetOfCards {
      */
 
     private boolean isColorValid() {
-        if(
-                isAllDiffrent(cardSet.get(0).getColor(),cardSet.get(1).getColor(),cardSet.get(2).getColor())
-                        ||
-                        isAllSame(cardSet.get(0).getColor(),cardSet.get(1).getColor(),cardSet.get(2).getColor())
-                ) {
-            return true;
-        }
-        return false;
+        return isAllDiffrent(cardSet.get(0).getColor(),cardSet.get(1).getColor(),cardSet.get(2).getColor())
+               ||
+               isAllSame(cardSet.get(0).getColor(),cardSet.get(1).getColor(),cardSet.get(2).getColor());
+
     }
 
     /**
@@ -153,12 +149,7 @@ public class SetOfCards {
      */
 
     public boolean isSet() {
-        if(cardSet.size()==3) {
-            if(isNumberValid() && isShapeValid() && isShadingValid() && isColorValid()) {
-                return true;
-            }
-        }
-        return false;
+        return (cardSet.size()==3 && isNumberValid() && isShapeValid() && isShadingValid() && isColorValid());
     }
 
     /**
