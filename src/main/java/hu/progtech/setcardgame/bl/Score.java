@@ -1,9 +1,5 @@
 package hu.progtech.setcardgame.bl;
 
-/**
- * Created by marianna on 2016.05.02..
- */
-
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -199,6 +195,6 @@ public class Score {
 
     @Override
     public String toString() {
-        return name + ":" + score;
+        return name.get() + ":" + score.get();
     }
 }

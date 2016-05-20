@@ -25,6 +25,10 @@ import java.util.List;
 
 public class ScoreDaoDOM implements ScoreDao {
 
+    /**
+     * {@link org.slf4j.Logger} to log about the data operations.
+     */
+
     private static final Logger logger = LoggerFactory.getLogger(ScoreDaoDOM.class);
 
     /**
@@ -145,6 +149,10 @@ public class ScoreDaoDOM implements ScoreDao {
         }
         return -1;
     }
+
+    /**
+     * Creates the xml file to store the scores in if it does not exists, else checks the root element and sets it to be leaderBoard.
+     */
 
     private void createOrReplace(){
         if(leaderBoard.exists()){

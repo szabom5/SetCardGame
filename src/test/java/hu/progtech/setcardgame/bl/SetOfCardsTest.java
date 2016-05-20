@@ -32,10 +32,57 @@ public class SetOfCardsTest {
         Card card1 = new Card(0,0,0,0);
         Card card2 = new Card(1,1,1,1);
         Card card3 = new Card(2,2,2,2);
-        Card card4 = new Card(0,1,0,1);
         SetOfCards setOfCards = new SetOfCards(card1, card2, card3);
         assertTrue(setOfCards.isSet());
-        setOfCards = new SetOfCards(card1,card2, card4);
+        setOfCards = new SetOfCards(card1,card1, card1);
+        assertTrue(setOfCards.isSet());
+        card1 = new Card(0,0,0,0);
+        card2 = new Card(0,1,1,1);
+        card3 = new Card(0,2,2,2);
+        setOfCards = new SetOfCards(card1,card2, card3);
+        assertTrue(setOfCards.isSet());
+        card1 = new Card(0,0,0,0);
+        card2 = new Card(1,0,1,1);
+        card3 = new Card(2,0,2,2);
+        setOfCards = new SetOfCards(card1,card2, card3);
+        assertTrue(setOfCards.isSet());
+        card1 = new Card(0,0,0,0);
+        card2 = new Card(1,1,0,1);
+        card3 = new Card(2,2,0,2);
+        setOfCards = new SetOfCards(card1,card2, card3);
+        assertTrue(setOfCards.isSet());
+        card1 = new Card(0,0,0,0);
+        card2 = new Card(1,1,1,0);
+        card3 = new Card(2,2,2,0);
+        setOfCards = new SetOfCards(card1,card2, card3);
+        assertTrue(setOfCards.isSet());
+
+        card1 = new Card(0,0,0,0);
+        card2 = new Card(0,1,1,1);
+        card3 = new Card(2,2,2,2);
+        setOfCards = new SetOfCards(card1,card2, card3);
+        assertFalse(setOfCards.isSet());
+        card1 = new Card(0,0,0,0);
+        card2 = new Card(1,0,1,1);
+        card3 = new Card(2,2,2,2);
+        setOfCards = new SetOfCards(card1,card2, card3);
+        assertFalse(setOfCards.isSet());
+        card1 = new Card(0,0,0,0);
+        card2 = new Card(1,1,0,1);
+        card3 = new Card(2,2,2,2);
+        setOfCards = new SetOfCards(card1,card2, card3);
+        assertFalse(setOfCards.isSet());
+        card1 = new Card(0,0,0,0);
+        card2 = new Card(1,1,1,0);
+        card3 = new Card(2,2,2,2);
+        setOfCards = new SetOfCards(card1,card2, card3);
+        assertFalse(setOfCards.isSet());
+        card1 = new Card(0,0,0,0);
+        card2 = new Card(1,1,1,1);
+        card3 = new Card(2,2,2,1);
+        setOfCards = new SetOfCards(card1,card2, card3);
+        assertFalse(setOfCards.isSet());
+        setOfCards.removeFromSetOfCards(card1);
         assertFalse(setOfCards.isSet());
     }
 
@@ -95,6 +142,12 @@ public class SetOfCardsTest {
         assertFalse(setOfCards1.equals("valami"));
         assertFalse(setOfCards1.equals(setOfCards4));
         assertTrue(setOfCards4.equals(setOfCards5));
+        setOfCards4.addCardToSet(card1);
+        setOfCards5.addCardToSet(card1);
+        assertTrue(setOfCards4.equals(setOfCards5));
+        setOfCards4.addCardToSet(card2);
+        setOfCards5.addCardToSet(card3);
+        assertFalse(setOfCards4.equals(setOfCards5));
     }
 
     @Test

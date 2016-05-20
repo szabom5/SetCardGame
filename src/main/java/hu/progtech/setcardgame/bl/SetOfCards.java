@@ -140,6 +140,15 @@ public class SetOfCards {
     }
 
     /**
+     * Removes a {@link hu.progtech.setcardgame.bl.Card} from the {@code cardSet}.
+     * @param c The {@link hu.progtech.setcardgame.bl.Card} to remove
+     */
+
+    public void removeFromSetOfCards(Card c) {
+        cardSet.remove(c);
+    }
+
+    /**
      * Returns the List of Cards.
      * @return The List of Cards
      */
@@ -166,14 +175,13 @@ public class SetOfCards {
 
         if(that.cardSet.size() == cardSet.size()){
             switch (cardSet.size()) {
-                case 0: return that.cardSet.isEmpty();
                 case 1: return cardSet.get(0).equals(that.cardSet.get(0));
                 case 2: return cardSet.get(0).equals(that.cardSet.get(0)) &&
                         cardSet.get(1).equals(that.cardSet.get(1));
                 case 3: return cardSet.get(0).equals(that.cardSet.get(0)) &&
                         cardSet.get(1).equals(that.cardSet.get(1)) &&
                         cardSet.get(2).equals(that.cardSet.get(2));
-                default: return false;
+                default: return that.cardSet.isEmpty();
             }
         }else {
             return false;
@@ -192,9 +200,5 @@ public class SetOfCards {
         return "SetOfCards{" +
                 "cardSet= " + cardSet.get(0).toString() + cardSet.get(1).toString()+ cardSet.get(2).toString() +
                 '}';
-    }
-
-    public void removeFromSetOfCards(Card c) {
-        cardSet.remove(c);
     }
 }
