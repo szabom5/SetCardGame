@@ -164,19 +164,33 @@ public class SetOfCards {
 
         SetOfCards that = (SetOfCards) o;
 
-        return cardSet != null ? cardSet.equals(that.cardSet) : that.cardSet == null;
+        if(that.cardSet.size() == cardSet.size()){
+            switch (cardSet.size()) {
+                case 0: return that.cardSet.isEmpty();
+                case 1: return cardSet.get(0).equals(that.cardSet.get(0));
+                case 2: return cardSet.get(0).equals(that.cardSet.get(0)) &&
+                        cardSet.get(1).equals(that.cardSet.get(1));
+                case 3: return cardSet.get(0).equals(that.cardSet.get(0)) &&
+                        cardSet.get(1).equals(that.cardSet.get(1)) &&
+                        cardSet.get(2).equals(that.cardSet.get(2));
+                default: return false;
+            }
+        }else {
+            return false;
+        }
+
 
     }
 
     @Override
     public int hashCode() {
-        return cardSet != null ? cardSet.hashCode() : 0;
+        return !cardSet.isEmpty() ? cardSet.stream().mapToInt((x) -> x.hashCode()).sum() : 0;
     }
 
     @Override
     public String toString() {
         return "SetOfCards{" +
-                "cardSet=" + cardSet +
+                "cardSet= " + cardSet.get(0).toString() + cardSet.get(1).toString()+ cardSet.get(2).toString() +
                 '}';
     }
 

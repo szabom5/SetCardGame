@@ -135,6 +135,14 @@ public class CardTest {
 
         assertTrue(card1.equals(card2));
         assertFalse(card1.equals(card3));
+        card3.setNumber(0);
+        assertFalse(card1.equals(card3));
+        card3.setShape(0);
+        assertFalse(card1.equals(card3));
+        card3.setShading(0);
+        assertFalse(card1.equals(card3));
+        assertFalse(card1.equals(null));
+        assertFalse(card1.equals("valami"));
     }
 
     @Test

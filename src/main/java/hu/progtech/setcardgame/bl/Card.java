@@ -142,9 +142,9 @@ public class Card {
     @Override
     public int hashCode() {
         int result = getNumber();
-        result = 31 * result + getShape();
-        result = 31 * result + getShading();
-        result = 31 * result + getColor();
+        result = result + 31 * getShape();
+        result = result + 17 * getShading();
+        result = result + 49 * getColor();
         return result;
     }
 
