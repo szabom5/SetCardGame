@@ -296,7 +296,7 @@ public class ControllerMain implements Initializable{
             redrawCard(currentCard);
         } else {
             if(setOfCards.getCardSet().size()<3) {
-                setOfCards.addCardtoSet(currentCard);
+                setOfCards.addCardToSet(currentCard);
                 drawBorder(canvas,Color.CORAL);
             }
             if(setOfCards.getCardSet().size()==3) {

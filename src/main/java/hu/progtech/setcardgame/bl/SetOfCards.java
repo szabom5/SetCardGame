@@ -53,7 +53,7 @@ public class SetOfCards {
      * @param card A Card object
      */
 
-    public void addCardtoSet(Card card) {
+    public void addCardToSet(Card card) {
         if(cardSet.size()<3) {
             cardSet.add(card);
         }
@@ -68,7 +68,7 @@ public class SetOfCards {
      */
 
     private boolean isAllDiffrent(int a, int b, int c) {
-        return (a != b && a != c && b != c)?true:false;
+        return (a != b && a != c && b != c);
     }
 
     /**
@@ -80,7 +80,7 @@ public class SetOfCards {
      */
 
     private boolean isAllSame(int a, int b, int c) {
-        return (a == b && a == c && b == b)?true:false;
+        return (a == b && a == c);
     }
 
     /**
@@ -89,14 +89,9 @@ public class SetOfCards {
      */
 
     private boolean isNumberValid() {
-        if(
-                 isAllDiffrent(cardSet.get(0).getNumber(),cardSet.get(1).getNumber(),cardSet.get(2).getNumber())
-                    ||
-                    isAllSame(cardSet.get(0).getNumber(),cardSet.get(1).getNumber(),cardSet.get(2).getNumber())
-                ) {
-            return true;
-        }
-        return false;
+        return isAllDiffrent(cardSet.get(0).getNumber(),cardSet.get(1).getNumber(),cardSet.get(2).getNumber())
+               ||
+               isAllSame(cardSet.get(0).getNumber(),cardSet.get(1).getNumber(),cardSet.get(2).getNumber());
     }
 
     /**
@@ -105,14 +100,11 @@ public class SetOfCards {
      */
 
     private boolean isShapeValid() {
-        if(
-                isAllDiffrent(cardSet.get(0).getShape(),cardSet.get(1).getShape(),cardSet.get(2).getShape())
-                        ||
-                        isAllSame(cardSet.get(0).getShape(),cardSet.get(1).getShape(),cardSet.get(2).getShape())
-                ) {
-            return true;
-        }
-        return false;
+        return (isAllDiffrent(cardSet.get(0).getShape(),cardSet.get(1).getShape(),cardSet.get(2).getShape())
+                ||
+                isAllSame(cardSet.get(0).getShape(),cardSet.get(1).getShape(),cardSet.get(2).getShape())
+        );
+
     }
 
     /**
@@ -121,14 +113,9 @@ public class SetOfCards {
      */
 
     private boolean isShadingValid() {
-        if(
-                isAllDiffrent(cardSet.get(0).getShading(),cardSet.get(1).getShading(),cardSet.get(2).getShading())
-                        ||
-                        isAllSame(cardSet.get(0).getShading(),cardSet.get(1).getShading(),cardSet.get(2).getShading())
-                ) {
-            return true;
-        }
-        return false;
+        return isAllDiffrent(cardSet.get(0).getShading(),cardSet.get(1).getShading(),cardSet.get(2).getShading())
+               ||
+               isAllSame(cardSet.get(0).getShading(),cardSet.get(1).getShading(),cardSet.get(2).getShading());
     }
 
     /**
