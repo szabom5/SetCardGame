@@ -7,6 +7,15 @@ import java.util.Random;
 
 /**
  * {@code Deck} class represents the deck of {@link hu.progtech.setcardgame.bl.Card}s.
+  <p>To use this class, its constructor needs to be called, for example:</p>
+  <pre>
+      Deck deck = new Deck();
+ </pre>
+      <p> or with 1 argument: a list of cards: </p>
+ <pre>
+    Deck deck = new Deck(new ArrayList&lt;Card&gt;());
+  </pre>
+
  */
 
 public class Deck {

@@ -4,7 +4,19 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * Score class represents a score and player pair with additional data about the player's points.
+ * {@code Score} class represents a score and player pair with additional data about the player's points.
+ * <p>To use this class, its constructor needs to be called, for example:</p>
+     <pre>
+     Score score = new Score();
+    </pre>
+     <p>or with 2 parameters, the name and actual score of the player: </p>
+     <pre>
+    Score score = new Score("example",1000.0);
+    </pre>
+     <p> or with 4 parameters, name of the player and the data to calculate the actual score: </p>
+    <pre>
+    Score score = new Score("example", 1, 1, 1000);
+    </pre>
  */
 public class Score {
 
@@ -39,7 +51,7 @@ public class Score {
     private SimpleDoubleProperty score;
 
     /**
-     * Initialises a newly created Score object.
+     * Initialises a newly created {@code Score} object.
      */
 
     public Score() {
@@ -48,7 +60,7 @@ public class Score {
     }
 
     /**
-     * Constructs a new Score by setting the name and score of the player.
+     * Constructs a new {@code Score} by setting the name and score of the player.
      * @param name The name of the player
      * @param score The score of the player
      */
@@ -59,7 +71,7 @@ public class Score {
     }
 
     /**
-     * Constructs a new Score by setting the name of the player and the data to calculate the actual score.
+     * Constructs a new {@code Score} by setting the name of the player and the data to calculate the actual score.
      * @param name The name of the player
      * @param numberOfSetsFound The number of Sets the player found in the current round
      * @param numberOfHintsUsed The number of hints the player used in the current round

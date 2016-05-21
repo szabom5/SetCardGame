@@ -2,6 +2,14 @@ package hu.progtech.setcardgame.bl;
 
 /**
  * {@code Card} class represents a single {@code Card} of the {@link hu.progtech.setcardgame.bl.Deck}.
+ * <p>To use this class, its constructor needs to be called, for example:</p>
+    <pre>
+    Card card = new Card();
+    </pre>
+    <p> or with 4 parameters, the 4 properties of a set card: </p>
+    <pre>
+    Card card = new Card(0,0,0,0);
+    </pre>
  */
 
 public class Card {

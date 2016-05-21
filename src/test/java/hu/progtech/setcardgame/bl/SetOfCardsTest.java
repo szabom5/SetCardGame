@@ -150,7 +150,6 @@ public class SetOfCardsTest {
         Card card1 = new Card(0,0,0,0);
         Card card2 = new Card(1,1,1,1);
         Card card3 = new Card(2,2,2,2);
-        Card card4 = new Card(0,1,0,1);
         final SetOfCards setOfCards4 = new SetOfCards();
         final SetOfCards setOfCards5 = new SetOfCards();
 

@@ -4,19 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SetOfCards class represents a Set made up by three Cards.
+ * {@code SetOfCards} class represents a Set made up by three {@link hu.progtech.setcardgame.bl.Card}s.
+ * <p>To use this class, its constructor needs to be called, for example:</p>
+     <pre>
+     SetOfCards setOfCards = new SetOfCards();
+    </pre>
+    <p>or with 1 parameter, a list of cards to be stored as a set: </p>
+    <pre>
+    SetOfCards setOfCards = new SetOfCards(new ArrayList&lt;Card&gt;());
+    </pre>
+    <p> or with 3 parameters, such as 3 single cards: </p>
+    <pre>
+    SetOfCards setOfCards = new SetOfCards(new Card(), new Card(), new Card());
+     </pre>
  */
 
 public class SetOfCards {
 
     /**
-     * A List containing the three Cards.
+     * A {@link java.util.List} containing the three {@link hu.progtech.setcardgame.bl.Card}s.
      */
 
     private List<Card> cardSet;
 
     /**
-     * Initializes a newly created SetOfCards object.
+     * Initializes a newly created {@code SetOfCards} object.
      */
 
     public SetOfCards() {
@@ -24,8 +36,8 @@ public class SetOfCards {
     }
 
     /**
-     * Constructs a new SetOfCards object by setting the value of the List of Cards.
-     * @param cardSet A List containing the three Cards
+     * Constructs a new {@code SetOfCards} object by setting the value of the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s.
+     * @param cardSet A {@link java.util.List} containing the three {@link hu.progtech.setcardgame.bl.Card}s
 
      */
 
@@ -34,10 +46,10 @@ public class SetOfCards {
     }
 
     /**
-     * Constructs a new SetOfCards object by setting the value of the List of Cards with three Card objects.
-     * @param c1 A Card object
-     * @param c2 A Card object
-     * @param c3 A Card object
+     * Constructs a new {@code SetOfCards} object by setting the value of the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s with three {@link hu.progtech.setcardgame.bl.Card} objects.
+     * @param c1 A {@link hu.progtech.setcardgame.bl.Card} object
+     * @param c2 A {@link hu.progtech.setcardgame.bl.Card} object
+     * @param c3 A {@link hu.progtech.setcardgame.bl.Card} object
      */
 
     public SetOfCards(Card c1, Card c2, Card c3) {
@@ -49,8 +61,8 @@ public class SetOfCards {
     }
 
     /**
-     * Adds a Card object to the List of Cards if there is less than three Cards in it.
-     * @param card A Card object
+     * Adds a {@link hu.progtech.setcardgame.bl.Card} object to the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s if there is less than three cards in it.
+     * @param card A {@link hu.progtech.setcardgame.bl.Card} object
      */
 
     public void addCardToSet(Card card) {
@@ -60,19 +72,19 @@ public class SetOfCards {
     }
 
     /**
-     * Compares three values of the same property of a Card.
+     * Compares three values of the same property of a {@link hu.progtech.setcardgame.bl.Card}.
      * @param a The first value
      * @param b The second value
      * @param c The third value
      * @return True if the three values are all different, false if not.
      */
 
-    private boolean isAllDiffrent(int a, int b, int c) {
+    private boolean isAllDifferent(int a, int b, int c) {
         return (a != b && a != c && b != c);
     }
 
     /**
-     * Compares three values of the same property of a Card.
+     * Compares three values of the same property of a {@link hu.progtech.setcardgame.bl.Card}.
      * @param a The first value
      * @param b The second value
      * @param c The third value
@@ -89,7 +101,7 @@ public class SetOfCards {
      */
 
     private boolean isNumberValid() {
-        return isAllDiffrent(cardSet.get(0).getNumber(),cardSet.get(1).getNumber(),cardSet.get(2).getNumber())
+        return isAllDifferent(cardSet.get(0).getNumber(),cardSet.get(1).getNumber(),cardSet.get(2).getNumber())
                ||
                isAllSame(cardSet.get(0).getNumber(),cardSet.get(1).getNumber(),cardSet.get(2).getNumber());
     }
@@ -100,7 +112,7 @@ public class SetOfCards {
      */
 
     private boolean isShapeValid() {
-        return (isAllDiffrent(cardSet.get(0).getShape(),cardSet.get(1).getShape(),cardSet.get(2).getShape())
+        return (isAllDifferent(cardSet.get(0).getShape(),cardSet.get(1).getShape(),cardSet.get(2).getShape())
                 ||
                 isAllSame(cardSet.get(0).getShape(),cardSet.get(1).getShape(),cardSet.get(2).getShape())
         );
@@ -113,7 +125,7 @@ public class SetOfCards {
      */
 
     private boolean isShadingValid() {
-        return isAllDiffrent(cardSet.get(0).getShading(),cardSet.get(1).getShading(),cardSet.get(2).getShading())
+        return isAllDifferent(cardSet.get(0).getShading(),cardSet.get(1).getShading(),cardSet.get(2).getShading())
                ||
                isAllSame(cardSet.get(0).getShading(),cardSet.get(1).getShading(),cardSet.get(2).getShading());
     }
@@ -124,7 +136,7 @@ public class SetOfCards {
      */
 
     private boolean isColorValid() {
-        return isAllDiffrent(cardSet.get(0).getColor(),cardSet.get(1).getColor(),cardSet.get(2).getColor())
+        return isAllDifferent(cardSet.get(0).getColor(),cardSet.get(1).getColor(),cardSet.get(2).getColor())
                ||
                isAllSame(cardSet.get(0).getColor(),cardSet.get(1).getColor(),cardSet.get(2).getColor());
 
@@ -149,8 +161,8 @@ public class SetOfCards {
     }
 
     /**
-     * Returns the List of Cards.
-     * @return The List of Cards
+     * Returns the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s.
+     * @return The {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s
      */
 
     public List<Card> getCardSet() {
@@ -158,8 +170,8 @@ public class SetOfCards {
     }
 
     /**
-     * Sets the list of Cards.
-     * @param cardSet The List of Cards
+     * Sets the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s.
+     * @param cardSet The {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s
      */
 
     public void setCardSet(List<Card> cardSet) {
