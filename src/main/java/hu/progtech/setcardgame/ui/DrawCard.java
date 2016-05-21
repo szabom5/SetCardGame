@@ -1,12 +1,10 @@
+// CHECKSTYLE:OFF
 package hu.progtech.setcardgame.ui;
 
 import hu.progtech.setcardgame.bl.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-/**
- * Created by marianna on 2016.04.09..
- */
 public class DrawCard {
 
     private Card card;

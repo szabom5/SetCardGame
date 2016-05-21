@@ -142,11 +142,43 @@ public class SetOfCardsTest {
         assertFalse(setOfCards1.equals("valami"));
         assertFalse(setOfCards1.equals(setOfCards4));
         assertTrue(setOfCards4.equals(setOfCards5));
+
+    }
+
+    @Test
+    public void testEquals2() throws Exception {
+        Card card1 = new Card(0,0,0,0);
+        Card card2 = new Card(1,1,1,1);
+        Card card3 = new Card(2,2,2,2);
+        Card card4 = new Card(0,1,0,1);
+        final SetOfCards setOfCards4 = new SetOfCards();
+        final SetOfCards setOfCards5 = new SetOfCards();
+
         setOfCards4.addCardToSet(card1);
         setOfCards5.addCardToSet(card1);
         assertTrue(setOfCards4.equals(setOfCards5));
         setOfCards4.addCardToSet(card2);
         setOfCards5.addCardToSet(card3);
+        assertFalse(setOfCards4.equals(setOfCards5));
+        setOfCards4.removeFromSetOfCards(card2);
+        setOfCards4.addCardToSet(card3);
+        assertTrue(setOfCards4.equals(setOfCards5));
+    }
+
+    @Test
+    public void testEquals3() throws Exception {
+        Card card1 = new Card(0, 0, 0, 0);
+        Card card2 = new Card(1, 1, 1, 1);
+        Card card3 = new Card(2, 2, 2, 2);
+        Card card4 = new Card(0, 1, 2, 0);
+        SetOfCards setOfCards4 = new SetOfCards(card1, card2, card3);
+        SetOfCards setOfCards5 = new SetOfCards(card1, card2, card3);
+        assertTrue(setOfCards4.equals(setOfCards5));
+        setOfCards4 = new SetOfCards(card1, card2, card4);
+        assertFalse(setOfCards4.equals(setOfCards5));
+        setOfCards4 = new SetOfCards(card1, card4, card3);
+        assertFalse(setOfCards4.equals(setOfCards5));
+        setOfCards4 = new SetOfCards(card4, card2, card3);
         assertFalse(setOfCards4.equals(setOfCards5));
     }
 
@@ -161,7 +193,6 @@ public class SetOfCardsTest {
         final SetOfCards setOfCards3 = new SetOfCards(card1, card2, card4);
         final SetOfCards setOfCards4 = new SetOfCards();
         assertEquals(setOfCards1.hashCode(), setOfCards2.hashCode());
-        System.out.println(setOfCards1.hashCode()+" "+setOfCards3.hashCode());
         assertNotSame(setOfCards1.hashCode(), setOfCards3.hashCode());
         assertEquals(0, setOfCards4.hashCode());
 

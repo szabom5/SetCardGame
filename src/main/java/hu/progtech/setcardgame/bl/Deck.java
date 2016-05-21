@@ -100,10 +100,11 @@ public class Deck {
 
     public static SetOfCards hint(List<Card> list){
         SetOfCards setOfCards = new SetOfCards();
+        if(list == null || list.size()<3 ){return setOfCards;}
 
-        for (int i = 0; i < 10; i++) {
-            for (int z = i + 1; z < 11; z++) {
-                for (int u = z + 1; u < 12; u++) {
+        for (int i = 0; i < list.size()-2; i++) {
+            for (int z = i + 1; z < list.size()-1; z++) {
+                for (int u = z + 1; u < list.size(); u++) {
                     if (list.get(i) == null || list.get(z) == null || list.get(u) == null)
                     {
                         continue;
@@ -131,9 +132,10 @@ public class Deck {
     public List<Card> getDeck() {
         return deck;
     }
+
     @Override
     public String toString() {
-        return "Deck{" +
+        return "Deck {" +
                 "deck=" + deck +
                 '}';
     }

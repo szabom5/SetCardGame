@@ -1,9 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 <module name="Checker">
+    <module name="SuppressionCommentFilter"/>
+    <module name="SuppressWarningsFilter"/>
     <module name="JavadocPackage"/>
     <module name="TreeWalker">
-        <module name="JavadocMethod"/>
+        <module name="FileContentsHolder"/>
+        <module name="SuppressWarningsHolder"/>
+        <module name="AtclauseOrder"/>
+        <module name="JavadocMethod">
+            <property name="excludeScope" value="private"/>
+        </module>
         <module name="JavadocStyle"/>
         <module name="JavadocType"/>
         <module name="JavadocVariable">

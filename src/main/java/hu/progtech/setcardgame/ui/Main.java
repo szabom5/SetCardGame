@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.progtech.setcardgame.ui;
 
 import javafx.application.Application;
