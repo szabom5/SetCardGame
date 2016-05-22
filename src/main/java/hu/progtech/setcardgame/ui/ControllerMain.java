@@ -181,6 +181,7 @@ public class ControllerMain implements Initializable{
 
         lMsg.setText("");
         lMsg.setTextFill(Color.DARKRED);
+        logger.info("Reset the game");
     }
 
     @FXML
@@ -239,6 +240,7 @@ public class ControllerMain implements Initializable{
         if (result.isPresent()){
             score.setName(result.get());
             scoreDao.writeScore(score);
+            logger.info("Player: {} score: {}",score.getName(),score.getScore());
         }
 
         stopTimer();
@@ -290,7 +292,7 @@ public class ControllerMain implements Initializable{
 
         Card currentCard = cardsDisplayed.get(GridPane.getRowIndex(canvas)*4+ GridPane.getColumnIndex(canvas));
 
-        logger.info("Clicked on card: "+currentCard.toString());
+        logger.info("Clicked on card: {}", currentCard.toString());
 
         if(setOfCards.getCardSet().contains(currentCard)) {
             setOfCards.removeFromSetOfCards(currentCard);
@@ -412,7 +414,7 @@ public class ControllerMain implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         scoreDao = new ScoreDaoDOM("leaderBoard.xml");
-
+        logger.info("Initialize");
         TableColumn nameCol = new TableColumn("Name");
         nameCol.setMinWidth(200);
         nameCol.setSortable(true);

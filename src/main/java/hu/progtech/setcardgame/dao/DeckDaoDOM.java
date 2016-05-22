@@ -3,6 +3,8 @@ package hu.progtech.setcardgame.dao;
 import hu.progtech.setcardgame.bl.Card;
 import hu.progtech.setcardgame.bl.Deck;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -21,6 +23,12 @@ import java.util.List;
  */
 
 public class DeckDaoDOM implements DeckDao {
+
+    /**
+     * {@link org.slf4j.Logger} to log about the data operations.
+     */
+
+    private static final Logger logger = LoggerFactory.getLogger(DeckDaoDOM.class);
 
     /**
      * {@link java.io.File} to offer a pre-made series of shuffles to play.
@@ -48,7 +56,7 @@ public class DeckDaoDOM implements DeckDao {
             dBuilder = dbFactory.newDocumentBuilder();
 
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            logger.warn("Exception: "+e.getMessage());
         }
     }
 
@@ -86,7 +94,7 @@ public class DeckDaoDOM implements DeckDao {
 
 
         } catch (SAXException | IOException e) {
-            e.printStackTrace();
+            logger.warn("Exception: "+e.getMessage());
         }
 
         return new Deck(deck);

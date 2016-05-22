@@ -63,7 +63,7 @@ public class ScoreDaoDOM implements ScoreDao {
             createOrReplace();
 
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            logger.warn("Exception: "+e.getMessage());
         }
     }
 
@@ -99,7 +99,7 @@ public class ScoreDaoDOM implements ScoreDao {
             t.transform(source, result);
 
         } catch (SAXException | IOException | TransformerException e) {
-            logger.error("Exception: "+e.getMessage());
+            logger.warn("Exception: "+e.getMessage());
         }
     }
 
@@ -126,7 +126,7 @@ public class ScoreDaoDOM implements ScoreDao {
                 }
             }
         } catch (SAXException | IOException e) {
-            logger.error("Exception: "+e.getMessage());
+            logger.warn("Exception: "+e.getMessage());
         }
 
         return res;
@@ -173,7 +173,7 @@ public class ScoreDaoDOM implements ScoreDao {
                     t.transform(source, result);
                 }
             } catch (SAXException | IOException | TransformerException e) {
-                logger.error("Exception: "+e.getMessage());
+                logger.warn("Exception: "+e.getMessage());
             }
         }else{
             try {
@@ -192,7 +192,7 @@ public class ScoreDaoDOM implements ScoreDao {
                 t.transform(source, result);
 
             } catch (TransformerException e) {
-                logger.error("Exception: "+e.getMessage());
+                logger.warn("Exception: "+e.getMessage());
             }
         }
     }
