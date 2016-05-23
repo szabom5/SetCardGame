@@ -49,7 +49,7 @@ public class ScoreDaoDOM implements ScoreDao {
 
     /**
      * Constructs a {@code ScoreDaoDOM} and sets the file for the class to use.
-     * @param filename The name of the file
+     * @param filename the name of the file
      */
 
     public ScoreDaoDOM(String filename) {

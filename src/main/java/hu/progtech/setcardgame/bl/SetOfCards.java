@@ -37,7 +37,7 @@ public class SetOfCards {
 
     /**
      * Constructs a new {@code SetOfCards} object by setting the value of the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s.
-     * @param cardSet A {@link java.util.List} containing the three {@link hu.progtech.setcardgame.bl.Card}s
+     * @param cardSet a {@link java.util.List} containing the three {@link hu.progtech.setcardgame.bl.Card}s
 
      */
 
@@ -47,9 +47,9 @@ public class SetOfCards {
 
     /**
      * Constructs a new {@code SetOfCards} object by setting the value of the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s with three {@link hu.progtech.setcardgame.bl.Card} objects.
-     * @param c1 A {@link hu.progtech.setcardgame.bl.Card} object
-     * @param c2 A {@link hu.progtech.setcardgame.bl.Card} object
-     * @param c3 A {@link hu.progtech.setcardgame.bl.Card} object
+     * @param c1 a {@link hu.progtech.setcardgame.bl.Card} object
+     * @param c2 a {@link hu.progtech.setcardgame.bl.Card} object
+     * @param c3 a {@link hu.progtech.setcardgame.bl.Card} object
      */
 
     public SetOfCards(Card c1, Card c2, Card c3) {
@@ -62,7 +62,7 @@ public class SetOfCards {
 
     /**
      * Adds a {@link hu.progtech.setcardgame.bl.Card} object to the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s if there is less than three cards in it.
-     * @param card A {@link hu.progtech.setcardgame.bl.Card} object
+     * @param card a {@link hu.progtech.setcardgame.bl.Card} object
      */
 
     public void addCardToSet(Card card) {
@@ -73,10 +73,10 @@ public class SetOfCards {
 
     /**
      * Compares three values of the same property of a {@link hu.progtech.setcardgame.bl.Card}.
-     * @param a The first value
-     * @param b The second value
-     * @param c The third value
-     * @return True if the three values are all different, false if not.
+     * @param a the first value
+     * @param b the second value
+     * @param c the third value
+     * @return true if the three values are all different, false if not
      */
 
     private boolean isAllDifferent(int a, int b, int c) {
@@ -85,10 +85,10 @@ public class SetOfCards {
 
     /**
      * Compares three values of the same property of a {@link hu.progtech.setcardgame.bl.Card}.
-     * @param a The first value
-     * @param b The second value
-     * @param c The third value
-     * @return True if the three values are all the same, false if not.
+     * @param a the first value
+     * @param b the second value
+     * @param c the third value
+     * @return true if the three values are all the same, false if not
      */
 
     private boolean isAllSame(int a, int b, int c) {
@@ -97,7 +97,7 @@ public class SetOfCards {
 
     /**
      * Returns true if the number properties of the three cards in the list are compatible to make a Set.
-     * @return Returns true if the number properties of the three cards in the list are compatible to make a Set, false if not
+     * @return true if the number properties of the three cards in the list are compatible to make a Set, false if not
      */
 
     private boolean isNumberValid() {
@@ -108,7 +108,7 @@ public class SetOfCards {
 
     /**
      * Returns true if the shape properties of the three cards in the list are compatible to make a Set.
-     * @return Returns true if the shape properties of the three cards in the list are compatible to make a Set, false if not
+     * @return true if the shape properties of the three cards in the list are compatible to make a Set, false if not
      */
 
     private boolean isShapeValid() {
@@ -121,7 +121,7 @@ public class SetOfCards {
 
     /**
      * Returns true if the shading properties of the three cards in the list are compatible to make a Set.
-     * @return Returns true if the shading properties of the three cards in the list are compatible to make a Set, false if not
+     * @return true if the shading properties of the three cards in the list are compatible to make a Set, false if not
      */
 
     private boolean isShadingValid() {
@@ -132,7 +132,7 @@ public class SetOfCards {
 
     /**
      * Returns true if the color properties of the three cards in the list are compatible to make a Set.
-     * @return Returns true if the color properties of the three cards in the list are compatible to make a Set, false if not
+     * @return true if the color properties of the three cards in the list are compatible to make a Set, false if not
      */
 
     private boolean isColorValid() {
@@ -144,7 +144,7 @@ public class SetOfCards {
 
     /**
      * Returns true if the three Cards in the cardSet are compatible to form a Set and false if not.
-     * @return Returns true if the three Cards in the cardSet are compatible to form a Set, false if not
+     * @return true if the three Cards in the cardSet are compatible to form a Set, false if not
      */
 
     public boolean isSet() {
@@ -153,7 +153,7 @@ public class SetOfCards {
 
     /**
      * Removes a {@link hu.progtech.setcardgame.bl.Card} from the {@code cardSet}.
-     * @param c The {@link hu.progtech.setcardgame.bl.Card} to remove
+     * @param c the {@link hu.progtech.setcardgame.bl.Card} to remove
      */
 
     public void removeFromSetOfCards(Card c) {
@@ -162,7 +162,7 @@ public class SetOfCards {
 
     /**
      * Returns the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s.
-     * @return The {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s
+     * @return the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s
      */
 
     public List<Card> getCardSet() {
@@ -171,7 +171,7 @@ public class SetOfCards {
 
     /**
      * Sets the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s.
-     * @param cardSet The {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s
+     * @param cardSet the {@link java.util.List} of {@link hu.progtech.setcardgame.bl.Card}s
      */
 
     public void setCardSet(List<Card> cardSet) {

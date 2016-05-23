@@ -44,7 +44,7 @@ public class Deck {
 
     /**
      * Constructs a new {@code Deck} object by setting the list of {@link hu.progtech.setcardgame.bl.Card}s and resetting the index.
-     * @param list The List of {@link hu.progtech.setcardgame.bl.Card}s to maintain the deck
+     * @param list the List of {@link hu.progtech.setcardgame.bl.Card}s to maintain the deck
      */
 
     public Deck(List<Card> list) {
@@ -54,7 +54,7 @@ public class Deck {
 
     /**
      * Returns the next {@link hu.progtech.setcardgame.bl.Card} to be placed onto the Board.
-     * @return The next {@link hu.progtech.setcardgame.bl.Card} to be placed
+     * @return the next {@link hu.progtech.setcardgame.bl.Card} to be placed
      */
 
     public Card getNextCard() {
@@ -103,8 +103,8 @@ public class Deck {
 
     /**
      * Search for possible sets in a list of {@link hu.progtech.setcardgame.bl.Card}s.
-     * @param list The list of card to search in
-     * @return A {@link hu.progtech.setcardgame.bl.SetOfCards} if a set is found, else null
+     * @param list the list of card to search in
+     * @return a {@link hu.progtech.setcardgame.bl.SetOfCards} if a set is found, else null
      */
 
     public static SetOfCards hint(List<Card> list){
@@ -135,7 +135,7 @@ public class Deck {
 
     /**
      * Returns the list of {@link hu.progtech.setcardgame.bl.Card}s represented.
-     * @return The list of {@link hu.progtech.setcardgame.bl.Card}s
+     * @return the list of {@link hu.progtech.setcardgame.bl.Card}s
      */
 
     public List<Card> getDeck() {

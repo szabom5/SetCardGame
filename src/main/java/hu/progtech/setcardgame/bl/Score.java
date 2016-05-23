@@ -61,8 +61,8 @@ public class Score {
 
     /**
      * Constructs a new {@code Score} by setting the name and score of the player.
-     * @param name The name of the player
-     * @param score The score of the player
+     * @param name the name of the player
+     * @param score the score of the player
      */
 
     public Score(String name, double score) {
@@ -72,10 +72,10 @@ public class Score {
 
     /**
      * Constructs a new {@code Score} by setting the name of the player and the data to calculate the actual score.
-     * @param name The name of the player
-     * @param numberOfSetsFound The number of Sets the player found in the current round
-     * @param numberOfHintsUsed The number of hints the player used in the current round
-     * @param timeUsed The time it took the player to earn this score
+     * @param name the name of the player
+     * @param numberOfSetsFound the number of Sets the player found in the current round
+     * @param numberOfHintsUsed the number of hints the player used in the current round
+     * @param timeUsed the time it took the player to earn this score
      */
 
     public Score(String name, int numberOfSetsFound, int numberOfHintsUsed, int timeUsed) {
@@ -95,7 +95,7 @@ public class Score {
 
     /**
      * Returns the number of Sets the player found in the current round.
-     * @return The number of Sets the player found in the current round
+     * @return the number of Sets the player found in the current round
      */
 
     public int getNumberOfSetsFound() {
@@ -104,7 +104,7 @@ public class Score {
 
     /**
      * Sets the number of Sets the player found in the current round.
-     * @param numberOfSetsFound The number of Sets the player found in the current round
+     * @param numberOfSetsFound the number of Sets the player found in the current round
      */
 
     public void setNumberOfSetsFound(int numberOfSetsFound) {
@@ -113,7 +113,7 @@ public class Score {
 
     /**
      * Returns the number of hints the player used in the current round.
-     * @return The number of hints the player used in the current round
+     * @return the number of hints the player used in the current round
      */
 
     public int getNumberOfHintsUsed() {
@@ -122,7 +122,7 @@ public class Score {
 
     /**
      * Sets the number of hints the player used in the current round.
-     * @param numberOfHintsUsed The number of hints the player used in the current round
+     * @param numberOfHintsUsed the number of hints the player used in the current round
      */
 
     public void setNumberOfHintsUsed(int numberOfHintsUsed) {
@@ -131,7 +131,7 @@ public class Score {
 
     /**
      * Returns the time it took the player to earn this score.
-     * @return The time it took the player to earn this score
+     * @return the time it took the player to earn this score
      */
 
     public long getTimeUsed() {
@@ -140,7 +140,7 @@ public class Score {
 
     /**
      * Sets the time it took the player to earn this score.
-     * @param timeUsed The time it took the player to earn this score
+     * @param timeUsed the time it took the player to earn this score
      */
 
     public void setTimeUsed(long timeUsed) {
@@ -149,7 +149,7 @@ public class Score {
 
     /**
      * Returns the name of the player.
-     * @return The name of the player
+     * @return the name of the player
      */
 
     public String getName() {
@@ -158,7 +158,7 @@ public class Score {
 
     /**
      * Sets the name of the player.
-     * @param name The name of the player
+     * @param name the name of the player
      */
 
     public void setName(String name) {
@@ -167,7 +167,7 @@ public class Score {
 
     /**
      * Returns the actual points the player got in the current round.
-     * @return The points the player got in the current round
+     * @return the points the player got in the current round
      */
 
     public double getScore() {
@@ -176,7 +176,7 @@ public class Score {
 
     /**
      * Sets the score of the player.
-     * @param score The points the player got in the current round
+     * @param score the points the player got in the current round
      */
 
     public void setScore(double score) {

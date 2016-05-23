@@ -47,10 +47,10 @@ public class Card {
 
     /**
      * Constructs a new {@code Card} object by setting all four properties.
-     * @param number the {@code number} property of the {@code Card}.
-     * @param shape the {@code shape} property of the {@code Card}.
-     * @param shading the {@code shading} property of the {@code Card}.
-     * @param color the {@code color} property of the {@code Card}.
+     * @param number the {@code number} property of the {@code Card}
+     * @param shape the {@code shape} property of the {@code Card}
+     * @param shading the {@code shading} property of the {@code Card}
+     * @param color the {@code color} property of the {@code Card}
      */
 
     public Card(int number, int shape, int shading, int color) {
@@ -63,7 +63,7 @@ public class Card {
 
     /**
      * Returns the {@code number} property of the {@code Card}.
-     * @return the {@code number} property of the {@code Card}.
+     * @return the {@code number} property of the {@code Card}
      */
 
     public int getNumber() {
@@ -72,7 +72,7 @@ public class Card {
 
     /**
      * Sets the {@code number} property of the {@code Card}.
-     * @param number the {@code number} property of the {@code Card}.
+     * @param number the {@code number} property of the {@code Card}
      */
 
     public void setNumber(int number) {
@@ -81,7 +81,7 @@ public class Card {
 
     /**
      * Returns the {@code shape} property of the {@code Card}.
-     * @return the {@code shape} property of the {@code Card}.
+     * @return the {@code shape} property of the {@code Card}
      */
 
     public int getShape() {
@@ -99,7 +99,7 @@ public class Card {
 
     /**
      * Returns the {@code shading} property of the {@code Card}.
-     * @return the {@code shading} property of the {@code Card}.
+     * @return the {@code shading} property of the {@code Card}
      */
 
     public int getShading() {
@@ -108,7 +108,7 @@ public class Card {
 
     /**
      * Sets the {@code shading} property of the {@code Card}.
-     * @param shading the {@code shading} property of the {@code Card}.
+     * @param shading the {@code shading} property of the {@code Card}
      */
 
     public void setShading(int shading) {
@@ -117,7 +117,7 @@ public class Card {
 
     /**
      * Returns the {@code color} property of the {@code Card}.
-     * @return the {@code color} property of the {@code Card}.
+     * @return the {@code color} property of the {@code Card}
      */
 
     public int getColor() {
@@ -126,7 +126,7 @@ public class Card {
 
     /**
      * Sets the {@code color} property of the {@code Card}.
-     * @param color the {@code color} property of the {@code Card}.
+     * @param color the {@code color} property of the {@code Card}
      */
 
     public void setColor(int color) {
